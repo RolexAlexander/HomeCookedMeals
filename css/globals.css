@@ -1,87 +1,18 @@
-/* Reset and base styles */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html, body {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #333;
-  }
-  
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  ul, ol {
-    list-style: none;
-  }
-  
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  /* Container */
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-  }
-  
-  /* Flexbox utilities */
-  .flex {
-    display: flex;
-  }
-  
-  .flex-column {
-    flex-direction: column;
-  }
-  
-  .justify-center {
-    justify-content: center;
-  }
-  
-  .justify-between {
-    justify-content: space-between;
-  }
-  
-  .align-center {
-    align-items: center;
-  }
-  
-  /* Utility classes */
-  .text-center {
-    text-align: center;
-  }
-  
-  .mt-1 {
-    margin-top: 0.625rem;
-  }
-  
-  .mb-1 {
-    margin-bottom: 0.625rem;
-  }
-  
-  .my-1 {
-    margin-top: 0.625rem;
-    margin-bottom: 0.625rem;
-  }
-  
-  .mt-2 {
-    margin-top: 1.25rem;
-  }
-  
-  .mb-2 {
-    margin-bottom: 1.25rem;
-  }
-  
-  .my-2 {
-    margin-top: 1.25rem;
-    margin-bottom: 1.25rem;
-  }
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0px;
+  height: 100%;
+}
+/* a blue color as a generic focus style */
+button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline: -webkit-focus-ring-color auto 5px !important;
+}
+a {
+  text-decoration: none;
+}

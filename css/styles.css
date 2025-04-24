@@ -1,272 +1,366 @@
-/* Main layout */
+/* Basic Reset and Body Styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa; /* Background for area outside .home if needed */
+}
+
 .home {
-    width: 100%;
+    /* REMOVED max-width and margin: 0 auto */
+    /* background-color: #ffffff; */ /* Let sections control their background */
     min-height: 100vh;
-    background-color: #f9f9f9;
-  }
-  
-  .div {
-    width: 100%;
-    position: relative;
-  }
-  
-  /* Header and Navigation */
-  .overlap {
-    width: 100%;
-    height: 80px;
-    background-color: #fff;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    width: 100%; /* Make .home itself full width */
+}
+
+main {
+    flex-grow: 1;
+    width: 100%;
+}
+
+/* NEW: Utility Container for Inner Content */
+.container {
+    width: 100%;
+    max-width: 1320px; /* Adjust this max-width as needed (common values: 1140px, 1200px, 1320px) */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;  /* Gutters for smaller screens */
+    padding-right: 15px; /* Gutters for smaller screens */
+    box-sizing: border-box;
+}
+
+
+/* Header Styling */
+.header {
+    background-color: #ffffff; /* Header background is white */
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px 0; /* Vertical padding on header itself */
+    width: 100%;
+    box-sizing: border-box;
+}
+/* Wrap header inner content in .container */
+.header .container {
+    display: flex;
     align-items: center;
-    padding: 0 2rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    position: fixed;
+    justify-content: space-between;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logo-icon {
+    font-size: 28px;
+    color: #28a745;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+}
+
+.nav-cart-container {
+    display: flex;
+    align-items: center;
+    gap: 45px; /* Keep gap between nav and cart */
+    /* margin-left: auto; NO LONGER NEEDED here, handled by flexbox on container */
+}
+
+.navigation .navigation-pill-list {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    gap: 25px;
+}
+
+.navigation .navigation-pill {
+    text-decoration: none;
+    color: #555;
+    font-size: 16px;
+    padding-bottom: 8px; /* Adjusted padding */
+    position: relative;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+/* Keep other nav styles (.active, :hover, ::after) */
+.navigation .navigation-pill:hover {
+    color: #0056b3;
+}
+.navigation .navigation-pill.active {
+    color: #333;
+    font-weight: 500;
+}
+.navigation .navigation-pill.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #774ae4;
+}
+
+
+.cart-container .simple-cart {
+    font-size: 24px;
+    color: #555;
+    cursor: pointer;
+}
+
+/* Carousel Section - Stays Full Width */
+.carousel-section {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    line-height: 0;
+}
+
+.carousel-image {
+    position: relative;
+    width: 100%;
+    height: 530px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+/* Other carousel styles (.carousel-slide, .carousel-img-element, controls) remain the same */
+.carousel-slide {
+    position: absolute;
     top: 0;
     left: 0;
-    z-index: 100;
-  }
-  
-  .navigation-pill-list {
-    display: flex;
-    gap: 1.5rem;
-  }
-  
-  .organic-food {
-    position: absolute;
-    top: 25px;
-    left: 30px;
-    width: 30px;
-    height: 30px;
-    z-index: 101;
-  }
-  
-  .text-wrapper {
-    position: absolute;
-    top: 30px;
-    left: 70px;
-    white-space: nowrap;
-    z-index: 101;
-  }
-  
-  .simple-cart {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-    z-index: 101;
-  }
-  
-  .line {
-    width: 100%;
-    height: 1px;
-    background-color: #eee;
-    position: absolute;
-    bottom: 0;
-  }
-  
-  /* Hero/Carousel Section */
-  .carousel-image {
-    width: 100%;
-    height: 500px;
-    margin-top: 80px;
-    position: relative;
-  }
-  
-  .overlap-group {
     width: 100%;
     height: 100%;
-    position: relative;
-  }
-  
-  .image {
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    z-index: 1;
+}
+.carousel-slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+.carousel-img-element {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-  
-  .pagination-dot-group {
+    display: block;
+}
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(96, 66, 214, 0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    cursor: pointer;
     display: flex;
-    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.3s ease, background-color 0.2s ease;
+}
+.carousel-image:hover .carousel-arrow {
+    opacity: 1;
+}
+.carousel-arrow:hover {
+    background-color: rgba(76, 46, 194, 1);
+}
+.carousel-arrow.prev {
+    left: 20px;
+}
+.carousel-arrow.next {
+    right: 20px;
+}
+.pagination-dot-group {
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-  }
-  
-  .carousel-arrow {
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
-    z-index: 5;
-  }
-  
-  .chevron-right-wrapper {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    z-index: 5;
-    width: 40px;
-    height: 40px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: rgba(96, 66, 214, 0.8);
+    padding: 6px 12px;
+    border-radius: 12px;
+    z-index: 3;
+}
+.pagination-dot {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: inline-block;
     cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .chevron-right-wrapper:hover {
-    background-color: #fff;
-  }
-  
-  /* Specials Section */
-  .title-2 {
-    text-align: center;
-    margin: 3rem 0 2rem;
-  }
-  
-  .title-2::after {
-    content: "";
-    display: block;
-    width: 200px;
-    height: 2px;
-    background-color: #ff5252;
-    margin: 0.5rem auto 0;
-  }
-  
-  .line-2 {
-    width: 200px;
-    height: 2px;
-    background-color: #ff5252;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: -1.5rem;
-  }
-  
-  /* Product Cards */
-  .card, .card-2, .card-3, .card-4 {
-    width: 270px;
-    height: 320px;
-    position: absolute;
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card {
-    left: 50px;
-    top: 650px;
-    background-image: url('https://c8.alamy.com/comp/2BXPETK/beef-medallions-with-vegetable-and-sauce-top-view-2BXPETK.jpg');
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .card-2 {
-    left: 350px;
-    top: 650px;
-    background-image: url('https://media.istockphoto.com/id/1211547141/photo/modern-thai-fusion-appetizer-plate.jpg?s=612x612&w=0&k=20&c=cwVp8WgGKjwBKOXWoWNzxpQFH2v7J3Bs6ZpxEJwrcIM=');
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .card-3 {
-    left: 650px;
-    top: 650px;
-    background-image: url('https://www.tasteofhome.com/wp-content/uploads/2018/01/Ratatouille_EXPS_SSCBZ18_8819_D10_12_4b-4.jpg');
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .card-4 {
-    left: 950px;
-    top: 650px;
-    background-image: url('https://media.istockphoto.com/id/1457491110/photo/fish-with-herbs-grilled-on-plate.jpg?s=612x612&w=0&k=20&c=sH_SKIpCVUNjGS5YTI8NvRKHW6ZaHBLwg3I9-oLKFuk=');
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .overlap-2, .overlap-3, .overlap-4, .overlap-5 {
+    transition: background-color 0.3s ease;
+}
+.pagination-dot.active {
+    background-color: white;
+}
+
+
+/* Section Styling */
+.content-section {
+    padding: 40px 0; /* Vertical padding on the section */
     width: 100%;
-    height: 80%;
-    position: relative;
-  }
-  
-  .icon-button {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-  }
-  
-  .document-add-wrapper {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-  }
-  
-  .text-wrapper-2 {
-    position: absolute;
-    bottom: 60px;
-    right: 15px;
-    color: #fff;
+    box-sizing: border-box;
+    background-color: #ffffff; /* Default background for sections */
+}
+.content-section.alt-bg { /* Optional class for alternating background */
+     background-color: #f8f9fa;
+}
+
+/* Specials Section Styling */
+.specials-section .container {
+    text-align: center; /* Center title/underline within container */
+}
+.specials-title {
+    font-size: 28px;
     font-weight: 600;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-  
-  .text-wrapper-3 {
-    position: absolute;
-    bottom: 30px;
-    left: 15px;
     color: #333;
-    font-weight: 600;
-  }
-  
-  .text-wrapper-4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    /* text-align: center; */ /* Centering handled by container */
+}
+.specials-underline {
+    width: 100px;
+    height: 3px;
+    background-color: #e1aedc;
+    margin: 0 auto 40px auto; /* Center underline */
+    border-radius: 2px;
+}
+.specials-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center cards within the grid */
+    gap: 30px;
+}
+
+/* Card Styling remains the same */
+.card {
+    width: 296px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease;
+}
+.card:hover {
+     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+.card-image-container {
+    position: relative;
+    width: 100%;
+    height: 174px;
+}
+.card-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.card-icons {
     position: absolute;
-    bottom: 10px;
-    left: 15px;
-    color: #ff5252;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.icon-button {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s, background-color 0.2s;
+}
+.icon-button:hover {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.card-content {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    flex-grow: 1;
+}
+.item-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 10px;
+}
+.item-price {
+    font-size: 16px;
     font-weight: 600;
-  }
-  
-  /* Media Queries */
-  @media screen and (max-width: 1200px) {
-    .card {
-      left: 5%;
-    }
-    
-    .card-2 {
-      left: 30%;
-    }
-    
-    .card-3 {
-      left: 55%;
-    }
-    
-    .card-4 {
-      left: 80%;
-    }
-  }
-  
-  @media screen and (max-width: 768px) {
-    .navigation-pill-list {
-      gap: 1rem;
-    }
-    
-    .carousel-image {
-      height: 400px;
-    }
-    
-    .card, .card-2, .card-3, .card-4 {
-      width: 220px;
-      height: 280px;
-    }
-  }
+    color: #333;
+    white-space: nowrap;
+}
+
+
+/* Placeholder/Future Section Styling */
+.placeholder-section {
+    background-color: #f8f9fa; /* Example different background */
+}
+.placeholder-section .container {
+     text-align: center;
+}
+.placeholder-section h2 {
+     margin-top: 0;
+}
+
+
+/* Footer Styling */
+.footer {
+    background-color: #343a40;
+    color: #f8f9fa;
+    padding: 20px 0; /* Vertical padding on footer element */
+    margin-top: auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+/* Wrap footer inner content in .container */
+.footer .container {
+     text-align: center;
+}
+.footer p {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+}
+.footer-nav a {
+    color: #adb5bd;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+.footer-nav a:hover {
+    color: #ffffff;
+}

@@ -1,109 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Cooked Meals</title>
-    <link rel="stylesheet" href="css/globals.css" />
-    <link rel="stylesheet" href="css/styleguide.css" />
     <link rel="stylesheet" href="css/styles.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- REMOVED max-width from here -->
     <div class="home">
-      <div class="div">
-        <!-- Header and Navigation -->
-        <div class="overlap">
-          <div class="navigation-pill-list">
-            <div class="navigation-pill"><div class="title">Home</div></div>
-            <div class="navigation-pill"><div class="title">Menu</div></div>
-            <div class="navigation-pill"><div class="title">Locations</div></div>
-            <div class="navigation-pill"><div class="title">Login</div></div>
-          </div>
-          <img class="line" src="img/line-1.svg" alt="Divider Line" />
-        </div>
-        <img class="simple-cart" src="img/simple-cart.svg" alt="Shopping Cart" />
-        <img class="organic-food" src="img/organic-food.svg" alt="Organic Food Icon" />
-        <div class="text-wrapper">Home Cooked Meals</div>
-        
-        <!-- Hero/Carousel Section -->
-        <div class="carousel-image">
-          <div class="overlap-group">
-            <img class="image" src="https://media.istockphoto.com/id/603267744/photo/tapas-food.jpg?s=612x612&w=0&k=20&c=kHdCs_6B9YizzPkuynSpgJnTf8m37xsAQ6czvu0cXBU=" alt="Delicious Home Cooked Meal" />
-            <div class="pagination-dot-group">
-              <div class="pagination-dot"></div>
-              <div class="pagination-dot-2"></div>
-              <div class="pagination-dot-2"></div>
-            </div>
-            <div class="carousel-arrow">
-              <img class="img" src="img/chevron-left.svg" alt="Previous" />
-            </div>
-            <div class="chevron-right-wrapper">
-              <img class="img" src="img/chevron-right.svg" alt="Next" />
-            </div>
-          </div>
-        </div>
-        
-        <!-- Specials Section -->
-        <div class="title-2">Specials</div>
-        <img class="line-2" src="img/line-2.svg" alt="Divider Line" />
-        
-        <!-- Product Cards -->
-        <div class="card">
-          <div class="overlap-2">
-            <div class="icon-button">
-              <img class="img-2" src="img/heart-3.svg" alt="Add to Favorites" />
-            </div>
-            <div class="document-add-wrapper">
-              <img class="img-2" src="img/document-add-3.svg" alt="Add to Cart" />
-            </div>
-          </div>
-          <div class="text-wrapper-2">98</div>
-          <div class="text-wrapper-3">Phantom Gainer</div>
-          <div class="text-wrapper-4">$1,449</div>
-        </div>
-        
-        <div class="card-2">
-          <div class="overlap-3">
-            <div class="icon-button">
-              <img class="img-2" src="img/heart.svg" alt="Add to Favorites" />
-            </div>
-            <div class="document-add-wrapper">
-              <img class="img-2" src="img/document-add-2.svg" alt="Add to Cart" />
-            </div>
-          </div>
-          <div class="text-wrapper-2">98</div>
-          <div class="text-wrapper-3">Sea Food</div>
-          <div class="text-wrapper-4">$2,449</div>
-        </div>
-        
-        <div class="card-3">
-          <div class="overlap-4">
-            <div class="icon-button">
-              <img class="img-2" src="img/heart-2.svg" alt="Add to Favorites" />
-            </div>
-            <div class="document-add-wrapper">
-              <img class="img-2" src="img/document-add-4.svg" alt="Add to Cart" />
-            </div>
-          </div>
-          <div class="text-wrapper-2">98</div>
-          <div class="text-wrapper-3">Rattatouli</div>
-          <div class="text-wrapper-4">$9,449</div>
-        </div>
-        
-        <div class="card-4">
-          <div class="overlap-5">
-            <div class="icon-button">
-              <img class="img-2" src="img/image.svg" alt="Add to Favorites" />
-            </div>
-            <div class="document-add-wrapper">
-              <img class="img-2" src="img/document-add.svg" alt="Add to Cart" />
-            </div>
-          </div>
-          <div class="text-wrapper-2">98</div>
-          <div class="text-wrapper-3">GT Hallal Samon Grilled</div>
-          <div class="text-wrapper-4">$1,449</div>
-        </div>
-      </div>
+        <header class="header">
+            <!-- ADDED Inner Container -->
+            <div class="container">
+                <div class="logo-container">
+                    <i class="logo-icon fa-solid fa-leaf"></i>
+                    <span class="logo-text">Home Cooked Meals</span>
+                </div>
+                <div class="nav-cart-container">
+                    <nav class="navigation">
+                        <ul class="navigation-pill-list">
+                            <li><a href="#" class="navigation-pill active">Home</a></li>
+                            <li><a href="#" class="navigation-pill">Menu</a></li>
+                            <li><a href="#" class="navigation-pill">Locations</a></li>
+                            <li><a href="#" class="navigation-pill">Login</a></li>
+                        </ul>
+                    </nav>
+                    <div class="cart-container">
+                        <i class="simple-cart fa-solid fa-cart-shopping"></i>
+                    </div>
+                </div>
+            </div> <!-- End Inner Container -->
+        </header>
+
+        <main>
+            <!-- Carousel stays full width -->
+            <section class="carousel-section">
+                <div class="carousel-image" id="carouselContainer">
+                    <!-- Slides and controls -->
+                     <div class="carousel-slide active">
+                        <img class="carousel-img-element" src="https://media.istockphoto.com/id/603267744/photo/tapas-food.jpg?s=612x612&w=0&k=20&c=kHdCs_6B9YizzPkuynSpgJnTf8m37xsAQ6czvu0cXBU=" alt="Featured Meal 1" />
+                    </div>
+                    <div class="carousel-slide">
+                        <img class="carousel-img-element" src="https://media.istockphoto.com/id/1155240408/photo/delicious-meal-on-a-black-plate-top-view-copy-space.jpg?s=612x612&w=0&k=20&c=vrMzS4pY_QjiDtGf1Lh39mPXG3m6xJAGm5MKsmCLb2k=" alt="Featured Meal 2" />
+                    </div>
+                    <div class="carousel-slide">
+                        <img class="carousel-img-element" src="https://media.istockphoto.com/id/1081422898/photo/pan-fried-duck.jpg?s=612x612&w=0&k=20&c=kzlrX7KJivvufQx9mLd-MH6lHIWYu_Gg8fQNIFFAo0s=" alt="Featured Meal 3" />
+                    </div>
+                    <button class="carousel-arrow prev" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="carousel-arrow next" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+                    <div class="pagination-dot-group" id="paginationDots"></div>
+                </div>
+            </section>
+
+            <!-- Section with inner container -->
+            <section class="specials-section content-section">
+                <!-- ADDED Inner Container -->
+                <div class="container">
+                    <h2 class="specials-title">Specials</h2>
+                    <div class="specials-underline"></div>
+                    <div class="specials-grid">
+                        <!-- Card items -->
+                         <div class="card">
+                            <div class="card-image-container">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCFLjen7wiNyQSM8jBAIRMyYcm9fO4EzlBYw&s" alt="Phantom Gainer" />
+                                <div class="card-icons">
+                                    <i class="icon-button fa-regular fa-heart"></i>
+                                    <i class="icon-button fa-regular fa-bookmark"></i>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="item-name">Phantom Gainer</span>
+                                <span class="item-price">$1,449</span>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-image-container">
+                                <img src="https://img.hellofresh.com/w_3840,q_auto,f_auto,c_limit,fl_lossy/hellofresh_website/us/lp/meals/Pescatarian-meal-ginger-turmeric-tilapia-082019.jpg" alt="Sea Food" />
+                               <div class="card-icons">
+                                    <i class="icon-button fa-regular fa-heart"></i>
+                                    <i class="icon-button fa-regular fa-bookmark"></i>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="item-name">Sea Food</span>
+                                <span class="item-price">$2,449</span>
+                            </div>
+                        </div>
+                        <div class="card">
+                             <div class="card-image-container">
+                                <img src="https://cravinghomecooked.com/wp-content/uploads/2022/03/creamy-herb-chicken-1-2-750x750.jpg.webp" alt="Rattatouli" />
+                               <div class="card-icons">
+                                    <i class="icon-button fa-regular fa-heart"></i>
+                                    <i class="icon-button fa-regular fa-bookmark"></i>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="item-name">Rattatouli</span>
+                                <span class="item-price">$9,449</span>
+                            </div>
+                        </div>
+                        <div class="card">
+                           <div class="card-image-container">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMLnfREQY7d9ndEwd0dwVES4GZumeKknYIUA&s" alt="GT Hallal Samon Grilled" />
+                               <div class="card-icons">
+                                    <i class="icon-button fa-regular fa-heart"></i>
+                                    <i class="icon-button fa-regular fa-bookmark"></i>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="item-name">GT Hallal Samon Grilled</span>
+                                <span class="item-price">$1,449</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End Inner Container -->
+            </section>
+
+            <!-- Add more sections here, wrapping their content in <div class="container"> -->
+
+        </main>
+
+        <footer class="footer">
+            <!-- ADDED Inner Container -->
+            <div class="container">
+                <p>© <span id="currentYear"></span> Home Cooked Meals. All rights reserved.</p>
+                <nav class="footer-nav">
+                    <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                </nav>
+            </div> <!-- End Inner Container -->
+        </footer>
     </div>
-  </body>
+
+    <script src="js/scripts.js"></script>
+</body>
 </html>
