@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Details - Home Cooked Meals</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="public/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        /* --- Base & Layout --- */
+        body { background-color: #f8f9fa; }
+        /* Remove default container padding if it interferes with full-width */
+        /* .container { padding: 0; } /* Revisit if needed */
+
+        /* --- Header --- */
+        /* Ensure header background is distinct if overlapping content */
+        .header { background-color: #ffffff; position: relative; z-index: 10; }
+
+        /* --- Full Width Hero --- */
+        .hero-section-full {
+            width: 100%; /* Take full viewport width */
+            height: 500px; /* Adjust height as desired */
+            overflow: hidden; /* Hide overflow */
+            position: relative; /* For potential overlays */
+            background-color: #e0e0e0; /* Placeholder */
+        }
+        .hero-image-full {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the area */
+        }
+
+        /* --- Meal Content Layout (Below Hero, Constrained) --- */
+        .meal-content-wrapper {
+            /* Reintroduce container constraints */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px 0 20px; /* Top padding, side padding */
+            /* This is the new main layout container */
+            display: flex;
+            flex-wrap: wrap; /* Allow wrap on smaller screens */
+            gap: 40px; /* Gap between main info and sidebar */
+            align-items: flex-start;
+        }
+
+        /* --- Left Column: Main Info --- */
+        .meal-main-info {
+            flex: 2; /* Takes more space */
+            min-width: 400px; /* Adjust min-width */
+        }
+        .meal-title {
+            font-size: 36px;
+            font-weight: 600;
+            color: #343a40;
+            margin: 0; /* Reset margin */
+            line-height: 1.3;
+        }
+        .meal-subtitle {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-top: 8px;
+            margin-bottom: 30px; /* Space before description */
+        }
+         .meal-description {
+            font-size: 0.95rem;
+            color: #495057;
+            line-height: 1.7;
+        }
+         .meal-description strong { color: #343a40; }
+
+        /* --- Right Column: Sidebar Info --- */
+        .meal-sidebar-info {
+            flex: 1;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            gap: 30px; /* Gap between price/actions and order box */
+        }
+
+        /* Grouping for Ratings, Actions, Price */
+        .rating-actions-price {
+            display: flex;
+            flex-direction: column; /* Stack vertically */
+            align-items: flex-end; /* Align content to the right */
+            gap: 15px; /* Space between elements */
+        }
+        .ratings {
+            display: flex;
+            gap: 3px;
+            color: #f1c40f;
+            font-size: 20px;
+             order: 1; /* Order for visual layout */
+        }
+        .ratings .star.dimmed { opacity: 0.4; }
+        .product-actions {
+            display: flex;
+            gap: 12px;
+            order: 2; /* Order for visual layout */
+        }
+        .action-button { /* Style from previous version */
+             font-size: 16px; color: #6c757d; background-color: #ffffff; border: 1px solid #dee2e6;
+             border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+             cursor: pointer; transition: all 0.2s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .action-button:hover { background-color: #f8f9fa; color: #774ae4; box-shadow: 0 2px 5px rgba(0,0,0,0.08); }
+        .action-button i { line-height: 1; }
+
+        .meal-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #343a40; /* Black price as per image */
+            order: 3; /* Order for visual layout */
+            margin-top: 5px; /* Small space above price */
+        }
+
+        /* Order Section Styling (Keep internal styles from previous) */
+        .order-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px; /* Adjusted padding */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e9ecef;
+            width: 100%; /* Take full width of sidebar column */
+            order: 4; /* Ensure it's below price etc */
+        }
+        .quantity-label { font-size: 1rem; font-weight: 600; margin-bottom: 15px; color: #343a40; }
+        .quantity-controls { display: flex; align-items: center; justify-content: space-between; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 30px; padding: 6px 10px; margin-bottom: 25px; } /* Adjusted padding/margin */
+        .quantity-button { width: 32px; height: 32px; border-radius: 50%; border: none; background-color: #ffffff; color: #774ae4; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; font-weight: bold; transition: all 0.2s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .quantity-button:hover { background-color: #f1f3f5; box-shadow: 0 2px 5px rgba(0,0,0,0.15); }
+        .quantity-button:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
+        .quantity-button i { line-height: 1; }
+        .quantity-display { font-size: 1.1rem; font-weight: 600; min-width: 35px; text-align: center; color: #343a40; }
+        .checkout-button { width: 100%; padding: 12px; border-radius: 8px; background-color: #774ae4; color: white; font-size: 0.95rem; font-weight: 600; border: none; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 10px rgba(119, 74, 228, 0.25); }
+        .checkout-button:hover { background-color: #5a36b4; box-shadow: 0 6px 12px rgba(119, 74, 228, 0.35); }
+        .checkout-button i { font-size: 1em; }
+
+
+        /* Reviews Section (Keep styles from previous) */
+        .reviews-section {
+            /* Needs to be inside the main container */
+            width: 100%; /* Span full width of the container it's in */
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #e9ecef;
+        }
+        .reviews-heading { font-size: 24px; font-weight: 600; color: #343a40; margin-bottom: 30px; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .review-card { background-color: white; border-radius: 10px; padding: 25px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); border: 1px solid #f1f3f5; display: flex; flex-direction: column; }
+        .review-rating { display: flex; gap: 3px; margin-bottom: 15px; color: #f1c40f; font-size: 16px; }
+        .review-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; color: #343a40; }
+        .review-text { font-size: 0.9rem; line-height: 1.6; color: #555; margin-bottom: 20px; flex-grow: 1; }
+        .reviewer { display: flex; align-items: center; gap: 12px; margin-top: auto; padding-top: 15px; border-top: 1px solid #f1f3f5; }
+        .reviewer-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: #e0e0e0; overflow: hidden; }
+        .reviewer-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .reviewer-info { display: flex; flex-direction: column; }
+        .reviewer-name { font-weight: 600; font-size: 0.9rem; color: #333; }
+        .review-date { font-size: 0.8rem; color: #777; }
+
+
+        /* General Loading/Error State */
+        .loading-error-message { text-align: center; padding: 50px 20px; font-size: 1.2rem; color: #6c757d; }
+
+         /* Footer Spacing */
+         main { padding-bottom: 60px; /* Add padding to main instead of margin */ }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+             .meal-content-wrapper { gap: 30px; padding-top: 30px; }
+             .meal-main-info { min-width: 300px; }
+        }
+        @media (max-width: 768px) {
+            .hero-section-full { height: 350px; } /* Adjust hero height */
+            .meal-content-wrapper { flex-direction: column; gap: 30px; padding-top: 25px; }
+            .meal-main-info { min-width: unset; order: 1;} /* Reset min-width, ensure it comes first */
+            .meal-sidebar-info { min-width: unset; order: 2; align-items: center; /* Center sidebar content */ }
+            .rating-actions-price { align-items: center; /* Center ratings/actions/price */ }
+            .order-section { max-width: 350px; /* Limit width of order box */ }
+             .meal-title { font-size: 28px; }
+             .reviews-grid { grid-template-columns: 1fr; }
+        }
+         @media (max-width: 576px) {
+             .hero-section-full { height: 280px; }
+         }
+
+    </style>
+</head>
+<body>
+    <div class="home">
+        <!-- Header (remains constrained) -->
+        <header class="header">
+            <div class="container">
+                 <a href="/" class="logo-container" style="text-decoration: none;">
+                    <i class="logo-icon fa-solid fa-leaf"></i>
+                    <span class="logo-text">Home Cooked Meals</span>
+                </a>
+                <div class="nav-cart-container">
+                     <nav class="navigation">
+                        <ul class="navigation-pill-list">
+                            <li><a href="/" class="navigation-pill">Home</a></li>
+                            <li><a href="/menu.html" class="navigation-pill">Menu</a></li>
+                            <li><a href="/locations.html" class="navigation-pill">Locations</a></li>
+                            <li><a href="/auth.html" class="navigation-pill">Login</a></li>
+                        </ul>
+                    </nav>
+                    <div class="cart-container">
+                        <a href="/cart.html" aria-label="View Cart">
+                            <i class="simple-cart fa-solid fa-cart-shopping"></i>
+                            <span id="cart-count">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main>
+            <!-- Hero Section (Full Width) -->
+            <section class="hero-section-full">
+                 <!-- Placeholder for image, updated by JS -->
+                <img class="hero-image-full" id="meal-image" src="" alt="Meal Image">
+            </section>
+
+            <!-- Wrapper for constrained content below hero -->
+            <div class="meal-content-wrapper" id="meal-detail-content">
+                <!-- Loading/Error Message (Initial State) -->
+                <div class="loading-error-message" style="width: 100%;">Loading meal details...</div>
+
+                 <!-- Content structure will be generated/updated by JS -->
+                 <!-- Example structure for reference (JS updates these elements):
+                 <div class="meal-main-info">
+                    <h1 class="meal-title" id="meal-title">Meal Title</h1>
+                    <p class="meal-subtitle" id="meal-subtitle">Subtitle</p>
+                    <div class="meal-description" id="meal-description"><p>Description...</p></div>
+                 </div>
+
+                 <div class="meal-sidebar-info">
+                     <div class="rating-actions-price">
+                         <div class="ratings"> Static Stars </div>
+                         <div class="product-actions"> Action Buttons </div>
+                         <div class="meal-price" id="meal-price">$Price</div>
+                     </div>
+                     <div class="order-section">
+                         // Quantity Controls & Button (with IDs for JS)
+                     </div>
+                 </div>
+
+                 <section class="reviews-section"> // Static Reviews Section
+                    // ... review cards ...
+                 </section>
+                 -->
+            </div>
+
+        </main>
+
+        <!-- Footer (remains constrained) -->
+        <footer class="footer">
+            <div class="container">
+                <p>© <span id="currentYear">...</span> Home Cooked Meals. All rights reserved.</p>
+                <nav class="footer-nav">
+                    <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div> <!-- End div.home -->
+
+    <!-- Scripts -->
+    <script src="js/header_auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/meal_app.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

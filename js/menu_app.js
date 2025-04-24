@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createMealCardHTML(meal) {
         const imageUrl = meal.imageUrl || DEFAULT_IMAGE;
-        const detailPageUrl = `/meal?id=${meal.id}`; // Construct detail page URL
+        const detailPageUrl = `/meal.html?id=${meal.id}`; // Construct detail page URL
 
         // Outer card div retains data-meal-id for potential future use
         return `
