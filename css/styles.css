@@ -1,19 +1,19 @@
-/* Basic Reset and Body Styling */
+/* === Base & Layout === */
 body, html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa; /* Background for area outside .home if needed */
+    background-color: #f8f9fa; /* Light grey page background */
+    color: #333; /* Default text color */
+    line-height: 1.6;
 }
 
 .home {
-    /* REMOVED max-width and margin: 0 auto */
-    /* background-color: #ffffff; */ /* Let sections control their background */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    width: 100%; /* Make .home itself full width */
+    width: 100%;
 }
 
 main {
@@ -21,117 +21,113 @@ main {
     width: 100%;
 }
 
-/* NEW: Utility Container for Inner Content */
 .container {
     width: 100%;
-    max-width: 1320px; /* Adjust this max-width as needed (common values: 1140px, 1200px, 1320px) */
+    max-width: 1320px; /* Content max width */
     margin-left: auto;
     margin-right: auto;
-    padding-left: 15px;  /* Gutters for smaller screens */
-    padding-right: 15px; /* Gutters for smaller screens */
+    padding-left: 15px;  /* Gutters */
+    padding-right: 15px; /* Gutters */
     box-sizing: border-box;
 }
 
-
-/* Header Styling */
+/* === Header === */
 .header {
-    background-color: #ffffff; /* Header background is white */
-    border-bottom: 1px solid #e0e0e0;
-    padding: 15px 0; /* Vertical padding on header itself */
+    background-color: #ffffff;
+    border-bottom: 1px solid #e9ecef; /* Slightly softer border */
+    padding: 15px 0;
     width: 100%;
     box-sizing: border-box;
+    position: sticky; /* Optional: Make header sticky */
+    top: 0;
+    z-index: 900; /* Ensure it's above content but below modals if any */
 }
-/* Wrap header inner content in .container */
 .header .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-
 .logo-container {
     display: flex;
     align-items: center;
     flex-shrink: 0;
 }
-
 .logo-icon {
     font-size: 28px;
-    color: #28a745;
+    color: #28a745; /* Green */
     margin-right: 10px;
 }
-
 .logo-text {
     font-size: 24px;
     font-weight: 600;
-    color: #333;
+    color: #343a40; /* Darker grey */
     white-space: nowrap;
 }
-
 .nav-cart-container {
     display: flex;
     align-items: center;
-    gap: 45px; /* Keep gap between nav and cart */
-    /* margin-left: auto; NO LONGER NEEDED here, handled by flexbox on container */
+    gap: 45px;
 }
-
 .navigation .navigation-pill-list {
     list-style: none;
     display: flex;
     padding: 0;
     margin: 0;
-    gap: 25px;
+    gap: 30px; /* Slightly increased gap */
 }
-
 .navigation .navigation-pill {
     text-decoration: none;
-    color: #555;
+    color: #495057; /* Mid grey */
     font-size: 16px;
-    padding-bottom: 8px; /* Adjusted padding */
+    font-weight: 500;
+    padding-bottom: 8px;
     position: relative;
     transition: color 0.2s ease;
     white-space: nowrap;
 }
-/* Keep other nav styles (.active, :hover, ::after) */
 .navigation .navigation-pill:hover {
-    color: #0056b3;
+    color: #0056b3; /* Link hover blue */
 }
 .navigation .navigation-pill.active {
-    color: #333;
-    font-weight: 500;
+    color: #343a40; /* Darker grey for active */
+    font-weight: 600;
 }
 .navigation .navigation-pill.active::after {
     content: '';
     position: absolute;
-    bottom: -1px;
+    bottom: -1px; /* Align with header border */
     left: 0;
     width: 100%;
-    height: 2px;
-    background-color: #774ae4;
+    height: 3px; /* Slightly thicker underline */
+    background-color: #774ae4; /* Theme purple */
+    border-radius: 1px;
 }
-
-
 .cart-container .simple-cart {
     font-size: 24px;
-    color: #555;
+    color: #495057;
     cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease; /* Added transition */
+}
+.cart-container .simple-cart:hover {
+    color: #343a40;
+    transform: scale(1.1); /* Slight scale on hover */
 }
 
-/* Carousel Section - Stays Full Width */
+
+/* === Carousel === */
 .carousel-section {
     margin: 0;
     padding: 0;
     width: 100%;
-    line-height: 0;
+    line-height: 0; /* Remove space below images */
 }
-
 .carousel-image {
     position: relative;
     width: 100%;
     height: 530px;
     overflow: hidden;
-    background-color: #f0f0f0;
+    background-color: #e9ecef; /* Placeholder background */
 }
-/* Other carousel styles (.carousel-slide, .carousel-img-element, controls) remain the same */
 .carousel-slide {
     position: absolute;
     top: 0;
@@ -156,13 +152,13 @@ main {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(96, 66, 214, 0.8);
+    background-color: rgba(52, 58, 64, 0.6); /* Darker, less saturated overlay */
     color: white;
     border: none;
     border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    font-size: 16px;
+    width: 40px; /* Slightly larger */
+    height: 40px; /* Slightly larger */
+    font-size: 18px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -175,31 +171,26 @@ main {
     opacity: 1;
 }
 .carousel-arrow:hover {
-    background-color: rgba(76, 46, 194, 1);
+    background-color: rgba(52, 58, 64, 0.8);
 }
-.carousel-arrow.prev {
-    left: 20px;
-}
-.carousel-arrow.next {
-    right: 20px;
-}
+.carousel-arrow.prev { left: 25px; }
+.carousel-arrow.next { right: 25px; }
+
 .pagination-dot-group {
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background-color: rgba(96, 66, 214, 0.8);
-    padding: 6px 12px;
-    border-radius: 12px;
+    gap: 10px;
+    background-color: rgba(52, 58, 64, 0.6);
+    padding: 8px 15px;
+    border-radius: 15px;
     z-index: 3;
 }
 .pagination-dot {
-    width: 8px;
-    height: 8px;
+    width: 10px; /* Slightly larger dots */
+    height: 10px;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     display: inline-block;
@@ -211,86 +202,83 @@ main {
 }
 
 
-/* Section Styling */
+/* === Content Sections === */
 .content-section {
-    padding: 40px 0; /* Vertical padding on the section */
+    padding: 60px 0; /* Consistent vertical padding */
     width: 100%;
     box-sizing: border-box;
-    background-color: #ffffff; /* Default background for sections */
+    background-color: #ffffff; /* Default white background */
 }
-.content-section.alt-bg { /* Optional class for alternating background */
-     background-color: #f8f9fa;
+.content-section.alt-bg {
+     background-color: #f8f9fa; /* Default light grey alternate */
 }
 
-/* Specials Section Styling */
-.specials-section .container {
-    text-align: center; /* Center title/underline within container */
-}
-.specials-title {
-    font-size: 28px;
+/* Title shared across sections */
+.section-title {
+    font-size: 32px; /* Slightly larger */
     font-weight: 600;
-    color: #333;
+    color: #343a40;
     margin-top: 0;
-    margin-bottom: 10px;
-    /* text-align: center; */ /* Centering handled by container */
-}
-.specials-underline {
-    width: 100px;
-    height: 3px;
-    background-color: #e1aedc;
-    margin: 0 auto 40px auto; /* Center underline */
-    border-radius: 2px;
-}
-.specials-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center cards within the grid */
-    gap: 30px;
+    margin-bottom: 40px; /* Increased bottom margin */
+    padding-bottom: 12px;
+    border-bottom: 3px solid #774ae4; /* Default: Theme purple */
+    display: inline-block;
+    width: auto;
 }
 
-/* Card Styling remains the same */
-.card {
-    width: 296px;
+/* Title wrapper used in Taste of Today */
+.title-date-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.todays-date {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #495057;
     background-color: #ffffff;
-    border-radius: 15px;
+    padding: 6px 18px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
+    white-space: nowrap;
+}
+
+/* === Card Styling (Shared Base) === */
+/* Base styles applicable to both .card and .menu-card-large */
+.card-base { /* Using a conceptual name, apply relevant styles to both .card and .menu-card-large */
+    background-color: #ffffff;
+    border-radius: 10px; /* UNIFIED: Softer radius */
+    /* border: none; */ /* UNIFIED: Removed border */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* UNIFIED: Initial shadow */
     overflow: hidden;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    transition: box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* UNIFIED: Transition */
 }
-.card:hover {
-     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+.card-base:hover {
+     transform: translateY(-4px); /* UNIFIED: Hover transform */
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* UNIFIED: Hover shadow */
 }
-.card-image-container {
-    position: relative;
-    width: 100%;
-    height: 174px;
-}
-.card-image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-.card-icons {
+
+/* Shared Icon Styles */
+.card-icons, .mcl-icons {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 10px;
+    right: 10px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 8px;
 }
 .icon-button {
     font-size: 18px;
-    color: rgba(255, 255, 255, 0.8);
-    background-color: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.85); /* Slightly more opaque */
+    background-color: rgba(0, 0, 0, 0.35); /* Slightly darker background */
     border-radius: 50%;
     padding: 5px;
     cursor: pointer;
-    width: 28px;
-    height: 28px;
+    width: 30px; /* Slightly larger */
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -298,69 +286,363 @@ main {
 }
 .icon-button:hover {
     color: #fff;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
 }
-.card-content {
-    padding: 15px;
+
+
+/* === Specials Section === */
+.specials-section .section-title {
+     border-color: #774ae4; /* Purple border for Specials */
+}
+
+.specials-grid {
+    display: grid; /* Using grid for consistency */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 30px;
+    margin-top: 0; /* Title already has margin */
+}
+
+/* Styles specific to the small card in Specials */
+.card {
+    /* Inherit from .card-base conceptually */
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Layout specific */
+    display: flex;
+    flex-direction: column;
+    width: auto; /* Allow grid to control width */
+    min-width: 280px; /* Ensure minimum size */
+}
+.card:hover {
+     transform: translateY(-4px);
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card .card-image-container { /* Use nesting for clarity */
+    position: relative;
+    width: 100%;
+    height: 180px; /* Slightly taller image */
+}
+.card .card-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.card .card-content {
+    padding: 15px 20px; /* Adjusted padding */
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #fff;
-    flex-grow: 1;
+    flex-grow: 1; /* Ensure it fills space */
 }
-.item-name {
-    font-size: 15px;
-    font-weight: 500;
-    color: #333;
+.card .item-name {
+    font-size: 1rem; /* Slightly larger */
+    font-weight: 600; /* Bolder */
+    color: #343a40;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-right: 10px;
+    margin-right: 15px;
 }
-.item-price {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
+.card .item-price {
+    font-size: 1rem;
+    font-weight: 700; /* Bolder price */
+    color: #774ae4; /* Use theme color for price */
     white-space: nowrap;
 }
 
 
-/* Placeholder/Future Section Styling */
-.placeholder-section {
-    background-color: #f8f9fa; /* Example different background */
+/* === Today's Menu Section === */
+.todays-menu-section {
+    background: linear-gradient(to bottom, #f8f9fa, #f1f3f5); /* Keep gradient */
+    padding: 60px 0;
 }
-.placeholder-section .container {
-     text-align: center;
+.todays-menu-section .section-title { /* Override section title border */
+    border-color: #e8590c; /* Warmer color */
 }
-.placeholder-section h2 {
-     margin-top: 0;
+
+.menu-item-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Always 2 columns on larger screens */
+    gap: 35px;
+    align-items: stretch; /* Make cards in the same row equal height */
+}
+
+/* Styles for the large card in Taste of Today */
+.menu-card-large {
+    /* Inherit from .card-base conceptually */
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    /* Layout specific */
+    display: flex;
+    width: 100%; /* Take full grid column width */
+}
+.menu-card-large:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+.mcl-image-container {
+    flex: 0 0 40%;
+    position: relative;
+    min-height: 220px;
+}
+.mcl-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+/* .mcl-icons uses shared icon styles */
+
+.mcl-content-container {
+    flex: 1;
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.mcl-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #343a40;
+    margin: 0 0 10px 0; /* Increased bottom margin */
+    line-height: 1.3;
+}
+.mcl-description {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 20px; /* Increased bottom margin */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    flex-grow: 1;
+    min-height: 4.05em;
+}
+.mcl-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto; /* Push footer to bottom */
+    padding-top: 10px; /* Add padding above footer */
+    gap: 15px;
+    border-top: 1px solid #f1f3f5; /* Subtle separator line */
+}
+.mcl-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #774ae4; /* Theme purple */
+    white-space: nowrap;
+}
+.mcl-add-button {
+    padding: 9px 20px; /* Slightly more padding */
+    background-color: #28a745; /* Green */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    white-space: nowrap;
+}
+.mcl-add-button:hover {
+    background-color: #218838;
+}
+.mcl-add-button:active {
+    transform: scale(0.97);
+}
+/* Add focus style for accessibility */
+.mcl-add-button:focus {
+    outline: 2px solid #28a745;
+    outline-offset: 2px;
+    background-color: #218838; /* Match hover */
+}
+.mcl-add-button i {
+    margin-left: 5px;
+    font-size: 0.85em;
 }
 
 
-/* Footer Styling */
+/* === Subscribe Section === */
+.subscribe-section {
+    background-color: #ffffff; /* White background */
+}
+.subscribe-section .container {
+    text-align: center;
+}
+.subscribe-title {
+    font-size: 26px; /* Match section titles more closely */
+    font-weight: 600;
+    color: #343a40;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+.subscribe-text {
+    font-size: 1rem; /* Standard paragraph size */
+    color: #495057;
+    margin-bottom: 35px;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+}
+.subscribe-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Increased gap */
+    flex-wrap: wrap;
+}
+.subscribe-input {
+    padding: 14px 18px; /* More padding */
+    border: 1px solid #ced4da;
+    border-radius: 6px; /* Match button */
+    font-size: 1rem;
+    min-width: 300px;
+    flex-grow: 1;
+    max-width: 450px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.subscribe-input:focus {
+    border-color: #774ae4; /* Highlight with theme color */
+    box-shadow: 0 0 0 3px rgba(119, 74, 228, 0.2); /* Subtle glow */
+    outline: none;
+}
+.subscribe-button {
+    padding: 14px 30px; /* Match input padding */
+    background-color: #774ae4; /* Theme purple */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.subscribe-button:hover {
+    background-color: #5a36b4;
+}
+.subscribe-button:focus {
+    outline: 2px solid #774ae4;
+    outline-offset: 2px;
+    background-color: #5a36b4; /* Match hover */
+}
+
+
+/* === Footer === */
 .footer {
-    background-color: #343a40;
-    color: #f8f9fa;
-    padding: 20px 0; /* Vertical padding on footer element */
+    background-color: #343a40; /* Dark footer */
+    color: #dee2e6; /* Lighter text */
+    padding: 30px 0; /* More padding */
     margin-top: auto;
     width: 100%;
     box-sizing: border-box;
+    font-size: 0.9rem;
 }
-/* Wrap footer inner content in .container */
 .footer .container {
      text-align: center;
 }
 .footer p {
-    margin: 0 0 10px 0;
-    font-size: 14px;
+    margin: 0 0 15px 0; /* More space below copyright */
 }
 .footer-nav a {
     color: #adb5bd;
     text-decoration: none;
-    margin: 0 10px;
-    font-size: 14px;
+    margin: 0 12px; /* More space */
     transition: color 0.2s ease;
 }
-.footer-nav a:hover {
+.footer-nav a:hover,
+.footer-nav a:focus {
     color: #ffffff;
+    outline: none; /* Simple focus indication */
+}
+
+
+/* === Responsive Adjustments === */
+
+/* Larger Tablets / Small Laptops */
+@media (max-width: 992px) {
+     .container { max-width: 960px; }
+     .menu-item-grid { gap: 25px; }
+     .mcl-content-container { padding: 15px 20px; }
+     .mcl-name { font-size: 1.15rem; }
+     .mcl-price { font-size: 1.1rem; }
+     .mcl-add-button { padding: 8px 16px; font-size: 0.85rem;}
+     .specials-grid { gap: 25px; }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    .container { max-width: 720px; }
+    .section-title { font-size: 28px; }
+    /* Header adjustments */
+    .nav-cart-container { gap: 25px; }
+    .navigation .navigation-pill-list { gap: 20px; }
+    .logo-text { font-size: 22px; }
+    /* Carousel height */
+    .carousel-image { height: 450px; }
+    /* Specials Grid: Already responsive with auto-fit */
+     .specials-grid {
+         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Adjust min size */
+         gap: 20px;
+     }
+    /* Menu Grid: Stack to 1 column */
+    .menu-item-grid {
+         grid-template-columns: 1fr;
+         max-width: 500px;
+         margin: 0 auto;
+         gap: 30px; /* Maintain decent gap for single column */
+     }
+    .menu-card-large { flex-direction: column; } /* Stack large card content */
+    .mcl-image-container {
+         flex-basis: auto; width: 100%; height: 220px; min-height: unset;
+    }
+    .mcl-description { min-height: unset; -webkit-line-clamp: 2; }
+    /* Subscribe form stacking */
+    .subscribe-form { flex-direction: column; align-items: stretch; gap: 15px; }
+    .subscribe-input { min-width: unset; width: 100%; max-width: 100%; }
+    .subscribe-button { width: 100%; max-width: 400px; margin: 0 auto; }
+}
+
+/* Mobile Phones */
+@media (max-width: 576px) {
+    .container { max-width: 100%; /* Allow full width on small screens */ }
+    .section-title { font-size: 24px; margin-bottom: 30px; }
+    /* Header */
+    .logo-text { font-size: 20px; }
+    .nav-cart-container { gap: 15px; }
+    .navigation .navigation-pill-list { gap: 15px; }
+    .navigation .navigation-pill { font-size: 15px; }
+    /* Carousel */
+    .carousel-image { height: 350px; }
+    /* Cards */
+    .specials-grid {
+         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+         gap: 15px;
+     }
+    .menu-item-grid { max-width: 100%; padding: 0 10px; gap: 25px; } /* Add slight padding */
+    .mcl-content-container { padding: 15px; }
+    .mcl-name { font-size: 1.1rem; }
+    .mcl-footer { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .mcl-add-button { width: 100%; text-align: center; }
+    .card .card-content { padding: 12px 15px; }
+    .card .item-name { font-size: 0.95rem; }
+    .card .item-price { font-size: 0.95rem; }
+    /* Subscribe */
+    .subscribe-title { font-size: 22px; }
+    .subscribe-text { font-size: 0.95rem; }
+    /* Footer */
+    .footer { padding: 25px 0; font-size: 0.85rem; }
+    .footer-nav a { margin: 0 8px; }
 }
