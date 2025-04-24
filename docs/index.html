@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Cooked Meals</title>
     <link rel="stylesheet" href="css/styles.css" />
@@ -20,12 +20,10 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <!-- Add CSS link if not already included in styles.css -->
+    <link rel="stylesheet" href="css/toast.css"> <!-- Assuming toast styles are separate or add to styles.css -->
   </head>
   <body>
-    <!-- Keep api.js script tag here IF your api.js doesn't rely on DOMContentLoaded -->
-    <!-- If api.js uses DOMContentLoaded, move all scripts to the bottom -->
-    <!-- <script src="js/api.js"></script> -->
-
     <div class="home">
       <header class="header">
         <div class="container">
@@ -36,7 +34,6 @@
           <div class="nav-cart-container">
             <nav class="navigation">
               <ul class="navigation-pill-list">
-                 <!-- Use actual links or keep # for now -->
                 <li><a href="/" class="navigation-pill active">Home</a></li>
                 <li><a href="/menu.html" class="navigation-pill">Menu</a></li>
                 <li><a href="/locations.html" class="navigation-pill">Locations</a></li>
@@ -44,7 +41,6 @@
               </ul>
             </nav>
             <div class="cart-container">
-               <!-- Add link and ID for cart count -->
               <a href="/cart.html" aria-label="View Cart">
                  <i class="simple-cart fa-solid fa-cart-shopping"></i>
                  <span id="cart-count">0</span>
@@ -55,49 +51,46 @@
       </header>
 
       <main>
-        <!-- Carousel Section - Structure remains, content removed -->
+        <!-- Carousel Section -->
         <section class="carousel-section">
           <div class="carousel-image" id="carouselContainer">
-            <!-- CAROUSEL SLIDES WILL BE LOADED HERE BY app.js -->
-            <div class="loading-placeholder"><p>Loading featured meals...</p></div>
-            <!-- Static controls and dots are kept for script.js -->
-            <button type="button" class="carousel-arrow prev" id="prevBtn">
+            <!-- Loading message initially -->
+            <div class="loading-placeholder">Loading featured meals...</div>
+            <!-- Static controls and dots (will be used by script.js) -->
+            <button type="button" class="carousel-arrow prev" id="prevBtn" style="display: none;"> <!-- Hide initially -->
               <i class="fa-solid fa-chevron-left"></i>
             </button>
-            <button type="button" class="carousel-arrow next" id="nextBtn">
+            <button type="button" class="carousel-arrow next" id="nextBtn" style="display: none;"> <!-- Hide initially -->
               <i class="fa-solid fa-chevron-right"></i>
             </button>
-            <div class="pagination-dot-group" id="paginationDots"></div>
+            <div class="pagination-dot-group" id="paginationDots" style="display: none;"></div> <!-- Hide initially -->
           </div>
         </section>
 
-        <!-- Specials Section - Structure remains, content removed -->
+        <!-- Specials Section -->
         <section class="specials-section content-section" aria-labelledby="specials-heading">
           <div class="container">
             <h2 class="section-title specials-title" id="specials-heading">Specials</h2>
             <div class="specials-grid">
-              <!-- SPECIAL CARDS (.card) WILL BE LOADED HERE BY app.js -->
-              <p>Loading specials...</p>
+              <p>Loading specials...</p> <!-- Placeholder -->
             </div>
           </div>
         </section>
 
-        <!-- Today's Menu Section - Structure remains, content removed -->
+        <!-- Today's Menu Section -->
         <section class="todays-menu-section content-section alt-bg" aria-labelledby="taste-heading">
           <div class="container">
               <div class="title-date-wrapper">
                   <h2 class="section-title todays-menu-title" id="taste-heading">Taste of Today</h2>
-                  <!-- script.js will target this -->
                   <p class="todays-date" id="todays-date-formatted">Loading date...</p>
               </div>
               <div class="menu-item-grid">
-                  <!-- TASTE OF DAY CARDS (.menu-card-large) WILL BE LOADED HERE BY app.js -->
-                  <p>Loading today's tastes...</p>
+                  <p>Loading today's tastes...</p> <!-- Placeholder -->
               </div>
           </div>
         </section>
 
-        <!-- Subscribe Section - Structure remains, add IDs for JS -->
+        <!-- Subscribe Section -->
         <section class="subscribe-section content-section" aria-labelledby="subscribe-heading">
           <div class="container">
             <h3 class="subscribe-title" id="subscribe-heading">Get Promo Deals!</h3>
@@ -105,20 +98,18 @@
               Subscribe to our newsletter and be the first to know about
               exclusive offers, new menu items, and special events.
             </p>
-            <!-- Add form ID and input ID -->
             <form class="subscribe-form" id="subscribe-form">
               <input
                 type="email"
                 id="subscribe-email"
-                name="email"
                 placeholder="Enter your email address"
                 required
                 class="subscribe-input"
+                name="email"
               />
               <button type="submit" class="subscribe-button">Subscribe</button>
             </form>
-            <!-- Add message div -->
-            <div id="subscribe-message" class="subscribe-feedback"></div>
+             <!-- REMOVED: <div id="subscribe-message">...</div> -->
           </div>
         </section>
       </main>
@@ -126,7 +117,6 @@
       <footer class="footer">
         <div class="container">
           <p>
-             <!-- script.js will target this -->
             © <span id="currentYear">...</span> Home Cooked Meals. All rights
             reserved.
           </p>
@@ -135,9 +125,9 @@
           </nav>
         </div>
       </footer>
-    </div> <!-- End div.home -->
+    </div>
 
-    <!-- Place ALL scripts at the end for best practice -->
+    <!-- Scripts -->
     <script src="js/api.js"></script>
     <script src="js/app.js"></script>
     <script src="js/script.js"></script>

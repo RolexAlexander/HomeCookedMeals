@@ -646,3 +646,180 @@ main {
     .footer { padding: 25px 0; font-size: 0.85rem; }
     .footer-nav a { margin: 0 8px; }
 }
+
+/* --- Toast Notification Styles (Corrected Positioning/Animation) --- */
+.toast {
+    position: fixed; /* Fixed positioning */
+    bottom: 20px;   /* Distance from bottom */
+    right: 20px;    /* Distance from right */
+    padding: 15px 25px;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    z-index: 1050;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    min-width: 250px;
+    text-align: center;
+    background-color: #333; /* Default background */
+  
+    /* Initial state: Off-screen (right) and invisible */
+    opacity: 0;
+    transform: translateX(calc(100% + 20px)); /* Move it off screen including its right margin */
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    pointer-events: none; /* Ignore clicks when hidden */
+  }
+  
+  /* State when '.show' class is added */
+  .toast.show {
+    opacity: 1;
+    transform: translateX(0); /* Slide into view */
+    pointer-events: auto; /* Allow clicks when visible */
+  }
+  
+  /* Type-specific styles (can override default background) */
+  .toast-success {
+    background-color: #28a745; /* Bootstrap success green */
+    /* border-left: 5px solid #218838; /* Optional border */
+  }
+  
+  .toast-error {
+    background-color: #dc3545; /* Bootstrap danger red */
+     /* border-left: 5px solid #c82333; /* Optional border */
+  }
+  
+  .toast-info {
+    background-color: #17a2b8; /* Bootstrap info cyan */
+     /* border-left: 5px solid #138496; /* Optional border */
+  }
+  
+  /* --- Subscribe Section Styling Improvements --- */
+  /* Add or modify these in styles.css */
+  
+  .subscribe-section {
+    background-color: #f8f9fa; /* Light background */
+    padding: 4rem 0; /* More padding */
+    text-align: center;
+  }
+  
+  .subscribe-title {
+    font-size: 1.8rem; /* Slightly larger title */
+    color: #333;
+    margin-bottom: 0.75rem;
+  }
+  
+  .subscribe-text {
+    color: #555;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto; /* Center the text */
+  }
+  
+  .subscribe-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between input and button */
+    max-width: 500px;
+    margin: 0 auto; /* Center the form */
+  }
+  
+  .subscribe-input {
+    flex-grow: 1; /* Take available space */
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  
+  .subscribe-input:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  .subscribe-button {
+    padding: 12px 25px;
+    background-color: #007bff; /* Primary button color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+    white-space: nowrap; /* Prevent button text wrapping */
+  }
+  
+  .subscribe-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+  
+  .subscribe-button:disabled {
+    background-color: #6c757d; /* Disabled color */
+    cursor: not-allowed;
+  }
+  
+  /* Style adjustments for smaller screens if needed */
+  @media (max-width: 576px) {
+    .subscribe-form {
+      flex-direction: column;
+      align-items: stretch; /* Make input/button full width */
+    }
+    .subscribe-input {
+        margin-bottom: 10px; /* Add space below input when stacked */
+    }
+  }
+  
+  /* --- Cart Count Circle Styling --- */
+#cart-count {
+    background-color: red;
+    color: white;
+    border-radius: 50%; /* Makes it a circle */
+  
+    /* Explicit width & height */
+    width: 20px;
+    height: 20px;
+  
+    /* Use Flexbox to center the number */
+    display: inline-flex; /* Use inline-flex to keep it flow with text/icons */
+    align-items: center;    /* Center vertically */
+    justify-content: center; /* Center horizontally */
+  
+    font-size: 0.75rem;    /* Adjust font size as needed */
+    font-weight: bold;    /* Make number stand out */
+    line-height: 1;       /* Ensure text stays centered vertically */
+    text-align: center;
+  
+    /* Positioning relative to the cart icon */
+    position: absolute; /* Change from relative if needed */
+    top: -8px;          /* Adjust position */
+    right: -8px;         /* Adjust position */
+  
+    /* Transition for appearing/disappearing */
+    opacity: 0;
+    transform: scale(0.5) translate(50%, -50%); /* Start small and offset */
+    transform-origin: center center; /* Scale from center */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-sizing: border-box; /* Include padding/border in width/height */
+  }
+  
+  #cart-count.has-items { /* Class added by JS when count > 0 */
+      opacity: 1;
+      transform: scale(1) translate(0, 0); /* Scale to full size and correct position */
+  }
+  
+  /* Optional: Hide count if zero (if not handled by JS opacity) */
+  /*
+  #cart-count:empty {
+    display: none;
+  }
+  */
+  
+  /* Adjust parent cart container if needed for absolute positioning */
+  .cart-container a { /* Or .cart-container */
+    position: relative; /* Needed for absolute positioning of child #cart-count */
+    display: inline-block; /* Ensure it takes space */
+  }
