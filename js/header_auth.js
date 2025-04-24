@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isLoggedIn = Api.isLoggedIn();
 
     // --- Target Elements ---
-    const loginListItem = document.querySelector('.navigation-pill-list li a[href="/auth.html"]')?.parentElement;
+    const loginListItem = document.querySelector('.navigation-pill-list li a[href="auth.html"]')?.parentElement;
     const navCartContainer = document.querySelector('.nav-cart-container');
     const cartContainer = navCartContainer?.querySelector('.cart-container');
 
