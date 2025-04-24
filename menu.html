@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Cooked Meals</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header and Navigation */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 35px;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .navigation-pill-list {
+      display: flex;
+      gap: 15px;
+    }
+
+    .navigation-pill {
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .navigation-pill:hover {
+      background-color: #f0f0f0;
+    }
+
+    .cart-icon {
+      cursor: pointer;
+      
+    }
+
+    /* Search Bar */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      max-width: 550px;
+      margin: 25px auto;
+      padding: 10px 15px;
+      border-radius: 30px;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-bar input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 5px 10px;
+      font-size: 16px;
+    }
+
+    .search-icon {
+      margin-right: 10px;
+      color: #757575;
+      
+    }
+
+    /* Main Content Layout */
+    .main-content {
+      display: flex;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    /* Filters Sidebar */
+    .filters {
+      width: 250px;
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .filters h2 {
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+
+    .price-range h3 {
+      margin: 15px 0 10px;
+      font-size: 16px;
+    }
+
+    .slider {
+      width: 100%;
+      margin: 10px 0 20px;
+    }
+
+    .price-inputs {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .price-input {
+      width: 45%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .categories h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+
+    .category-option {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .category-option input {
+      margin-right: 10px;
+    }
+
+    /* Food Cards Grid */
+    .food-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .food-card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .food-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .food-image {
+      height: 180px;
+      width: 100%;
+      background-color: #f5f5f5;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .food-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-actions {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .action-button {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .food-details {
+      padding: 15px;
+    }
+
+    .food-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .food-price {
+      font-weight: 700;
+      color: #e74c3c;
+      margin-bottom: 10px;
+    }
+
+    .ratings {
+      display: flex;
+      align-items: center;
+    }
+
+    .star {
+      color: #f1c40f;
+      margin-right: 2px;
+    }
+
+    .orders {
+      font-size: 14px;
+      color: #777;
+      margin-left: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header with Navigation -->
+    <header>
+      <div class="logo">
+        <img src="https://res.cloudinary.com/dg0m1wsvu/image/upload/f_auto,q_auto/v1670960629/components/benefits-icons/icon-vegan-friendly.svg" alt="Home Cooked Meals Logo">
+        <div class="logo-text">Home Cooked Meals</div>
+      </div>
+      
+      <div class="navigation-pill-list">
+        <div class="navigation-pill">Home</div>
+        <div class="navigation-pill">Menu</div>
+        <div class="navigation-pill">Locations</div>
+        <div class="navigation-pill">Login</div>
+      </div>
+      
+      <div class="cart-icon">
+        <img src="https://th.bing.com/th/id/OIP.QpDEV7TvCm2ditZIi2i3CgHaHa?rs=1&pid=ImgDetMain" alt="Cart" width="60" height="60">
+      </div>
+    </header>
+    
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <div class="search-icon">
+        <img src="https://th.bing.com/th/id/OIP.gN4fXWSZdwDKsHoFXTCshgHaHa?rs=1&pid=ImgDetMain" alt="Search" width="30" height="30">
+      </div>
+      <input type="text" placeholder="Looking for something delicious?">
+      <div class="trailing-icon">
+        <img src="https://th.bing.com/th/id/OIP.iYgp-Rvhj7L-YecY6B3ugwHaHa?rs=1&pid=ImgDetMain" alt="Voice Search" width="30" height="30">
+      </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Filters Sidebar -->
+      <div class="filters">
+        <h2>Filters</h2>
+        
+        <div class="price-range">
+          <h3>Price</h3>
+          <input type="range" min="0" max="15000" value="15000" class="slider" id="priceRange">
+          <div class="price-inputs">
+            <input type="text" class="price-input" value="Min: 0">
+            <input type="text" class="price-input" value="Max: $15,000">
+          </div>
+        </div>
+        
+        <div class="categories">
+          <h3>Categories</h3>
+          <div class="category-option">
+            <input type="checkbox" id="vegan">
+            <label for="vegan">Vegan</label>
+          </div>
+          <div class="category-option">
+            <input type="checkbox" id="vegetarian">
+            <label for="vegetarian">Vegetarian</label>
+          </div>
+          <div class="category-option">
+            <input type="checkbox" id="chinese">
+            <label for="chinese">Chinese</label>
+          </div>
+          <div class="category-option">
+            <input type="checkbox" id="seafood">
+            <label for="seafood">Sea Food</label>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Food Cards Grid -->
+      <div class="food-grid">
+        <!-- Food Card 1 -->
+        <div class="food-card">
+          <div class="food-image">
+            <img src="https://th.bing.com/th/id/OIP.Cm4unYnha_PvfKHsdWOGQQHaLH?rs=1&pid=ImgDetMain" alt="GT Hallal Salmon Grilled">
+            <div class="card-actions">
+              <div class="action-button">
+                <img src="https://static.vecteezy.com/system/resources/previews/021/013/524/original/like-icon-on-transparent-background-free-png.png" alt="Like">
+              </div>
+              <div class="action-button">
+                <img src="https://icon-library.com/images/add-icon-png/add-icon-png-27.jpg" alt="Add">
+              </div>
+            </div>
+          </div>
+          <div class="food-details">
+            <div class="food-name">GT Hallal Salmon Grilled</div>
+            <div class="food-price">$1,449</div>
+            <div class="ratings">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star" style="opacity: 0.5;">★</span>
+              <span class="orders">8 orders</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Food Card 2 -->
+        <div class="food-card">
+          <div class="food-image">
+            <img src="https://th.bing.com/th/id/OIP.12LcviwWBs9ZvUd8JtRKUQHaE8?rs=1&pid=ImgDetMain" alt="Steak Fresh">
+            <div class="card-actions">
+             <div class="action-button">
+                <img src="https://static.vecteezy.com/system/resources/previews/021/013/524/original/like-icon-on-transparent-background-free-png.png" alt="Like">
+              </div>
+              <div class="action-button">
+                <img src="https://icon-library.com/images/add-icon-png/add-icon-png-27.jpg" alt="Add">
+              </div>
+            </div>
+          </div>
+          <div class="food-details">
+            <div class="food-name">Steak Fresh</div>
+            <div class="food-price">$11,449</div>
+            <div class="ratings">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star" style="opacity: 0.5;">★</span>
+              <span class="orders">98 orders</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Food Card 3 -->
+        <div class="food-card">
+          <div class="food-image">
+            <img src="https://th.bing.com/th/id/OIP.wlY3jpIqY1OxNPabE658cwHaE7?rs=1&pid=ImgDetMain" alt="Eggs Spread">
+            <div class="card-actions">
+             <div class="action-button">
+                <img src="https://static.vecteezy.com/system/resources/previews/021/013/524/original/like-icon-on-transparent-background-free-png.png" alt="Like">
+              </div>
+              <div class="action-button">
+                <img src="https://icon-library.com/images/add-icon-png/add-icon-png-27.jpg" alt="Add">
+              </div>
+            </div>
+          </div>
+          <div class="food-details">
+            <div class="food-name">Egg Spread</div>
+            <div class="food-price">$5,449</div>
+            <div class="ratings">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star" style="opacity: 0.5;">★</span>
+              <span class="orders">10 orders</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Food Card 4 -->
+        <div class="food-card">
+          <div class="food-image">
+            <img src="https://th.bing.com/th/id/OIP.jA7ErgRbDlrHp3CSayNQgQHaJQ?rs=1&pid=ImgDetMain" alt="Vege Tasteful Desert">
+            <div class="card-actions">
+             <div class="action-button">
+                <img src="https://static.vecteezy.com/system/resources/previews/021/013/524/original/like-icon-on-transparent-background-free-png.png" alt="Like">
+              </div>
+              <div class="action-button">
+                <img src="https://icon-library.com/images/add-icon-png/add-icon-png-27.jpg" alt="Add">
+              </div>
+            </div>
+          </div>
+          <div class="food-details">
+            <div class="food-name">Vege Tasteful Desert</div>
+            <div class="food-price">$8,449</div>
+            <div class="ratings">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star" style="opacity: 0.5;">★</span>
+              <span class="orders">9 orders</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Food Card 5 -->
+        <div class="food-card">
+          <div class="food-image">
+            <img src="https://th.bing.com/th/id/OIP.CmkW3GGsMk4dA4Lrd3rg-gHaEK?rs=1&pid=ImgDetMain" alt="Sea Food Dish">
+            <div class="card-actions">
+             <div class="action-button">
+                <img src="https://static.vecteezy.com/system/resources/previews/021/013/524/original/like-icon-on-transparent-background-free-png.png" alt="Like">
+              </div>
+              <div class="action-button">
+                <img src="https://icon-library.com/images/add-icon-png/add-icon-png-27.jpg" alt="Add">
+              </div>
+            </div>
+          </div>
+          <div class="food-details">
+            <div class="food-name">Sea Food Dish </div>
+            <div class="food-price">$1,449</div>
+            <div class="ratings">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star" style="opacity: 0.5;">★</span>
+              <span class="orders">5 orders</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Food Card 6 -->
+        <div class="food-card">
+          <div class="food-image">
+            <img src="https://inspirationseek.com/wp-content/uploads/2016/02/Lasagna-Pictures_02.jpg" alt="Lasagna ">
+            <div class="card-actions">
+             <div class="action-button">
+                <img src="https://static.vecteezy.com/system/resources/previews/021/013/524/original/like-icon-on-transparent-background-free-png.png" alt="Like">
+              </div>
+              <div class="action-button">
+                <img src="https://icon-library.com/images/add-icon-png/add-icon-png-27.jpg" alt="Add">
+              </div>
+            </div>
+          </div>
+          <div class="food-details">
+            <div class="food-name">Lasagna </div>
+            <div class="food-price">$1,449</div>
+            <div class="ratings">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star" style="opacity: 0.5;">★</span>
+              <span class="orders">12 orders</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
