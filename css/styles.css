@@ -1,0 +1,272 @@
+/* Main layout */
+.home {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+  }
+  
+  .div {
+    width: 100%;
+    position: relative;
+  }
+  
+  /* Header and Navigation */
+  .overlap {
+    width: 100%;
+    height: 80px;
+    background-color: #fff;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+  }
+  
+  .navigation-pill-list {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .organic-food {
+    position: absolute;
+    top: 25px;
+    left: 30px;
+    width: 30px;
+    height: 30px;
+    z-index: 101;
+  }
+  
+  .text-wrapper {
+    position: absolute;
+    top: 30px;
+    left: 70px;
+    white-space: nowrap;
+    z-index: 101;
+  }
+  
+  .simple-cart {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    z-index: 101;
+  }
+  
+  .line {
+    width: 100%;
+    height: 1px;
+    background-color: #eee;
+    position: absolute;
+    bottom: 0;
+  }
+  
+  /* Hero/Carousel Section */
+  .carousel-image {
+    width: 100%;
+    height: 500px;
+    margin-top: 80px;
+    position: relative;
+  }
+  
+  .overlap-group {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .pagination-dot-group {
+    display: flex;
+    gap: 0.5rem;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    z-index: 5;
+  }
+  
+  .chevron-right-wrapper {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .chevron-right-wrapper:hover {
+    background-color: #fff;
+  }
+  
+  /* Specials Section */
+  .title-2 {
+    text-align: center;
+    margin: 3rem 0 2rem;
+  }
+  
+  .title-2::after {
+    content: "";
+    display: block;
+    width: 200px;
+    height: 2px;
+    background-color: #ff5252;
+    margin: 0.5rem auto 0;
+  }
+  
+  .line-2 {
+    width: 200px;
+    height: 2px;
+    background-color: #ff5252;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: -1.5rem;
+  }
+  
+  /* Product Cards */
+  .card, .card-2, .card-3, .card-4 {
+    width: 270px;
+    height: 320px;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card {
+    left: 50px;
+    top: 650px;
+    background-image: url('https://c8.alamy.com/comp/2BXPETK/beef-medallions-with-vegetable-and-sauce-top-view-2BXPETK.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .card-2 {
+    left: 350px;
+    top: 650px;
+    background-image: url('https://media.istockphoto.com/id/1211547141/photo/modern-thai-fusion-appetizer-plate.jpg?s=612x612&w=0&k=20&c=cwVp8WgGKjwBKOXWoWNzxpQFH2v7J3Bs6ZpxEJwrcIM=');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .card-3 {
+    left: 650px;
+    top: 650px;
+    background-image: url('https://www.tasteofhome.com/wp-content/uploads/2018/01/Ratatouille_EXPS_SSCBZ18_8819_D10_12_4b-4.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .card-4 {
+    left: 950px;
+    top: 650px;
+    background-image: url('https://media.istockphoto.com/id/1457491110/photo/fish-with-herbs-grilled-on-plate.jpg?s=612x612&w=0&k=20&c=sH_SKIpCVUNjGS5YTI8NvRKHW6ZaHBLwg3I9-oLKFuk=');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .overlap-2, .overlap-3, .overlap-4, .overlap-5 {
+    width: 100%;
+    height: 80%;
+    position: relative;
+  }
+  
+  .icon-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+  
+  .document-add-wrapper {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+  }
+  
+  .text-wrapper-2 {
+    position: absolute;
+    bottom: 60px;
+    right: 15px;
+    color: #fff;
+    font-weight: 600;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  
+  .text-wrapper-3 {
+    position: absolute;
+    bottom: 30px;
+    left: 15px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .text-wrapper-4 {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    color: #ff5252;
+    font-weight: 600;
+  }
+  
+  /* Media Queries */
+  @media screen and (max-width: 1200px) {
+    .card {
+      left: 5%;
+    }
+    
+    .card-2 {
+      left: 30%;
+    }
+    
+    .card-3 {
+      left: 55%;
+    }
+    
+    .card-4 {
+      left: 80%;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .navigation-pill-list {
+      gap: 1rem;
+    }
+    
+    .carousel-image {
+      height: 400px;
+    }
+    
+    .card, .card-2, .card-3, .card-4 {
+      width: 220px;
+      height: 280px;
+    }
+  }
