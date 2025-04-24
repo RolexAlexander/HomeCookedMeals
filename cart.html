@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Home Cooked Meals</title>
+    <!-- Link to the SAME stylesheet -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="public/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        /* --- Base & Layout --- */
+        body.cart-page-background {
+            background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Keep background fixed */
+            background-color: #f8f9fa; /* Fallback */
+        }
+
+        /* Override .home wrapper if needed for background */
+        .home.cart-layout {
+            background: none; /* Remove background from wrapper */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Cart Container --- */
+         .cart-page-container {
+            background-color: rgba(255, 255, 255, 0.95); /* Slightly less transparent */
+            border-radius: 12px;
+            padding: 30px 40px; /* Adjust padding */
+            width: 90%;
+            max-width: 900px; /* Adjust max-width */
+            margin: 40px auto; /* Center vertically/horizontally */
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+
+         h1.cart-title {
+            text-align: center;
+            margin-bottom: 35px;
+            font-size: 28px;
+            font-weight: 600;
+            color: #343a40;
+        }
+
+        /* --- Cart Grid Layout --- */
+        .cart-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr; /* Give more space to order review */
+            gap: 30px;
+        }
+
+        .cart-section { /* Common styling for both columns */
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e9ecef;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f1f3f5;
+        }
+        .section-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #343a40;
+        }
+        .section-subtitle { /* For item count */
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        /* --- Order Review Items --- */
+        .order-items-list {
+            max-height: 400px; /* Limit height and add scroll */
+            overflow-y: auto;
+            padding-right: 10px; /* Space for scrollbar */
+            margin-right: -10px; /* Offset padding */
+        }
+         /* Basic scrollbar styling */
+        .order-items-list::-webkit-scrollbar { width: 6px; }
+        .order-items-list::-webkit-scrollbar-thumb { background-color: #ced4da; border-radius: 3px; }
+
+        .cart-item {
+            display: flex;
+            align-items: flex-start; /* Align items to top */
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f1f3f5;
+            gap: 15px;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .item-image-cart {
+            width: 60px; /* Slightly larger image */
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .item-details-cart {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Push quantity down */
+             min-height: 60px; /* Match image height */
+        }
+
+        .item-name-cart {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #343a40;
+            margin-bottom: 8px;
+        }
+
+        .quantity-controls-cart { /* Reusing structure */
+            display: flex;
+            align-items: center;
+            border: 1px solid #dee2e6;
+            border-radius: 20px; /* Pill shape */
+            width: fit-content;
+            padding: 2px; /* Reduce padding */
+        }
+        .quantity-btn-cart {
+            background-color: #fff;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            color: #774ae4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        .quantity-btn-cart:hover { background-color: #f1f3f5; }
+        .quantity-btn-cart:disabled { opacity: 0.5; cursor: not-allowed; background-color: transparent; }
+        .quantity-display-cart {
+            width: 30px; /* Adjust width */
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #343a40;
+             padding: 0 5px;
+        }
+
+        .item-actions-cart {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: space-between; /* Push remove down */
+            min-height: 60px; /* Match image height */
+             min-width: 60px; /* Ensure space */
+        }
+
+        .item-price-cart {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #343a40;
+        }
+
+        .remove-item-btn {
+            color: #dc3545; /* Red remove */
+            font-size: 1rem; /* Use icon */
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px; /* Click area */
+            line-height: 1;
+            margin-top: 5px;
+             transition: color 0.2s;
+        }
+         .remove-item-btn:hover { color: #c82333; }
+
+         /* Placeholder for empty cart */
+         .empty-cart-message {
+             text-align: center;
+             padding: 30px 20px;
+             color: #6c757d;
+         }
+
+        /* --- Billing Summary --- */
+        .billing-details { margin-bottom: 20px; }
+
+        .billing-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+        .billing-label { color: #6c757d; }
+        .billing-value { font-weight: 500; color: #343a40; }
+        .billing-value-discount { color: #28a745; /* Green discount */ }
+
+        .grand-total-row {
+            border-top: 1px solid #e9ecef;
+            margin-top: 15px;
+            padding-top: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .comment-input { /* Keep original styling or adjust */
+            width: 100%; border: 1px solid #ced4da; border-radius: 6px; padding: 10px;
+            margin: 15px 0; font-size: 0.9rem; font-family: inherit;
+        }
+        .checkbox-container { /* Keep original styling or adjust */
+            display: flex; align-items: center; margin: 15px 0; font-size: 0.85rem; color: #495057;
+        }
+        input[type="checkbox"] { margin-right: 8px; accent-color: #774ae4; }
+        .privacy-link { color: #774ae4; text-decoration: none; font-weight: 500;}
+        .privacy-link:hover { text-decoration: underline; }
+
+        /* Pay Button */
+        #pay-button { /* Target the button */
+            width: 100%;
+            background-color: #774ae4; /* Theme purple */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+             box-shadow: 0 4px 10px rgba(119, 74, 228, 0.25);
+        }
+         #pay-button:hover { background-color: #5a36b4; box-shadow: 0 6px 12px rgba(119, 74, 228, 0.35); }
+         #pay-button:disabled { background-color: #adb5bd; cursor: not-allowed; box-shadow: none; }
+
+        .norton-badge { text-align: center; margin-top: 10px; opacity: 0.7;}
+
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 992px) {
+            .cart-page-container { max-width: 95%; }
+            .cart-grid { grid-template-columns: 1fr; /* Stack columns */ }
+        }
+        @media (max-width: 768px) {
+            .cart-page-container { padding: 20px; width: 95%; margin: 20px auto; }
+            h1.cart-title { font-size: 24px; margin-bottom: 25px;}
+            .cart-section { padding: 20px; }
+             .cart-grid { gap: 25px; }
+        }
+         @media (max-width: 576px) {
+             .cart-item { flex-direction: column; align-items: stretch; }
+             .item-image-cart { width: 100%; height: 150px; margin-bottom: 10px; }
+             .item-details-cart { min-height: unset; }
+             .item-actions-cart { flex-direction: row; justify-content: space-between; align-items: center; min-height: unset; margin-top: 10px; }
+             .remove-item-btn { margin-top: 0; }
+             .billing-row { font-size: 0.9rem; }
+             .grand-total-row { font-size: 1rem; }
+             #pay-button { padding: 12px; font-size: 0.95rem; }
+         }
+
+    </style>
+</head>
+<!-- Add specific body class -->
+<body class="cart-page-background">
+    <!-- Add specific wrapper class -->
+    <div class="home cart-layout">
+        <!-- Header (Copied, check active link/cart ID) -->
+         <header class="header">
+            <div class="container">
+                 <a href="index.html" class="logo-container" style="text-decoration: none;">
+                    <i class="logo-icon fa-solid fa-leaf"></i>
+                    <span class="logo-text">Home Cooked Meals</span>
+                </a>
+                <div class="nav-cart-container">
+                     <nav class="navigation">
+                        <ul class="navigation-pill-list">
+                            <li><a href="index.html" class="navigation-pill">Home</a></li>
+                            <li><a href="menu.html" class="navigation-pill">Menu</a></li>
+                            <li><a href="locations.html" class="navigation-pill">Locations</a></li>
+                            <li><a href="auth.html" class="navigation-pill">Login</a></li>
+                        </ul>
+                    </nav>
+                    <div class="cart-container">
+                        <!-- Make cart link active maybe? -->
+                        <a href="cart.html" class="active" aria-label="View Cart">
+                            <i class="simple-cart fa-solid fa-cart-shopping"></i>
+                            <span id="cart-count">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main>
+            <div class="cart-page-container">
+                <h1 class="cart-title">Shopping Cart</h1>
+
+                <div class="cart-grid">
+                    <!-- Order Review Section -->
+                    <div class="cart-section order-review-section">
+                        <div class="section-header">
+                            <div class="section-title">Order Review</div>
+                            <div class="section-subtitle" id="item-count">0 items in cart</div>
+                        </div>
+
+                        <div class="order-items-list" id="order-items-list">
+                            <!-- Cart items will be loaded here -->
+                             <p class="empty-cart-message">Your cart is empty.</p>
+                             <!-- Loading state example: -->
+                             <!-- <p class="loading-message">Loading cart...</p> -->
+                        </div>
+                        <!-- Optional: Delivery Options -->
+                         <!-- <div class="delivery-options"> ... </div> -->
+                    </div>
+
+                    <!-- Billing Summary Section -->
+                    <div class="cart-section billing-summary-section">
+                        <div class="section-header">
+                            <div class="section-title">Billing Summary</div>
+                            <!-- Optional dropdown icon -->
+                        </div>
+
+                        <div class="billing-details" id="billing-details">
+                            <div class="billing-row">
+                                <div class="billing-label">Subtotal</div>
+                                <div class="billing-value" id="billing-subtotal">$0.00</div>
+                            </div>
+                            <!-- Example Discount Row (hide if no discount) -->
+                            <!-- <div class="billing-row" id="discount-row" style="display: none;">
+                                <div class="billing-label">Discount</div>
+                                <div class="billing-value billing-value-discount" id="billing-discount">-$0.00</div>
+                            </div> -->
+                            <div class="billing-row">
+                                <div class="billing-label">Tax (<span id="tax-rate-display">0</span>%)</div>
+                                <div class="billing-value" id="billing-tax">$0.00</div>
+                            </div>
+
+                            <div class="billing-row grand-total-row">
+                                <div>Grand Total</div>
+                                <div id="billing-grandtotal">$0.00</div>
+                            </div>
+                        </div>
+
+                        <input type="text" class="comment-input" id="checkout-comments" placeholder="Add order comments (optional)">
+
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="privacy" checked>
+                            <label for="privacy">Please check to acknowledge our <a href="#" class="privacy-link" target="_blank">Privacy & Terms Policy</a></label>
+                        </div>
+
+                        <button id="pay-button" onclick="window.location.href='checkout.html'" disabled>Proceed to Payment</button>
+
+                        <div class="norton-badge">
+                           <img src="https://www.motivatemd.com/wp-content/uploads/2020/05/Norton-secured-logo-300x300.jpg" alt="Norton Secured" width="70">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer (Copied) -->
+        <footer class="footer">
+            <div class="container">
+                 <p>© <span id="currentYear">...</span> Home Cooked Meals. All rights reserved.</p>
+                <nav class="footer-nav">
+                    <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div> <!-- End div.home -->
+
+    <!-- Scripts -->
+    <script src="js/header_auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/cart_app.js"></script> <!-- NEW JS file -->
+    <script src="js/script.js"></script> <!-- Shared functions -->
+</body>
+</html>

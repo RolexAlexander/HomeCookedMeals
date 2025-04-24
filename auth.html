@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login or Register - Home Cooked Meals</title>
+    <!-- Link to the SAME stylesheet -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="public/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        /* --- Base & Layout --- */
+        body.auth-page {
+            /* Optional: Add a subtle background pattern or color */
+            /* background-color: #f4f7f6; */
+        }
+        .auth-container-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 180px); /* Adjust based on header/footer height */
+            padding: 40px 20px;
+        }
+        .auth-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px; /* Control form width */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e9ecef;
+        }
+
+        .auth-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #343a40;
+        }
+
+        /* --- Form Styling --- */
+        .form-section {
+            /* Styles common to both login and register sections */
+        }
+        .form-section.hidden {
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .form-input:focus {
+            border-color: #774ae4;
+            box-shadow: 0 0 0 3px rgba(119, 74, 228, 0.15);
+            outline: none;
+        }
+        /* Basic invalid style */
+         .form-input:invalid {
+             /* border-color: #dc3545; */ /* Can add red border for native validation */
+         }
+
+        .auth-button {
+            width: 100%;
+            padding: 14px;
+            background-color: #774ae4; /* Theme purple */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+             box-shadow: 0 4px 10px rgba(119, 74, 228, 0.2);
+             margin-top: 10px; /* Space above button */
+        }
+        .auth-button:hover {
+            background-color: #5a36b4;
+            box-shadow: 0 6px 12px rgba(119, 74, 228, 0.3);
+        }
+         .auth-button:disabled {
+             background-color: #adb5bd;
+             cursor: not-allowed;
+             box-shadow: none;
+         }
+
+        /* --- Toggle Links --- */
+        .toggle-auth-text {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .toggle-auth-link {
+            color: #774ae4;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .toggle-auth-link:hover {
+            text-decoration: underline;
+        }
+
+         /* Feedback area - Using Toast from script.js is preferred */
+         /* #auth-message {
+             text-align: center;
+             margin-top: 15px;
+             font-size: 0.9rem;
+             font-weight: 500;
+         }
+         #auth-message.success { color: #28a745; }
+         #auth-message.error { color: #dc3545; } */
+
+        /* Responsive */
+        @media (max-width: 576px) {
+            .auth-container { padding: 30px; }
+            .auth-title { font-size: 22px; }
+        }
+
+    </style>
+</head>
+<!-- Add specific body class -->
+<body class="auth-page">
+    <!-- Add specific wrapper class -->
+    <div class="home">
+        <!-- Header (Copied, check active link) -->
+         <header class="header">
+            <div class="container">
+                 <a href="index.html" class="logo-container" style="text-decoration: none;">
+                    <i class="logo-icon fa-solid fa-leaf"></i>
+                    <span class="logo-text">Home Cooked Meals</span>
+                </a>
+                <div class="nav-cart-container">
+                     <nav class="navigation">
+                        <ul class="navigation-pill-list">
+                            <li><a href="index.html" class="navigation-pill">Home</a></li>
+                            <li><a href="menu.html" class="navigation-pill">Menu</a></li>
+                            <li><a href="locations.html" class="navigation-pill">Locations</a></li>
+                            <!-- Make Login active -->
+                            <li><a href="auth.html" class="navigation-pill active">Login</a></li>
+                        </ul>
+                    </nav>
+                    <div class="cart-container">
+                        <a href="cart.html" aria-label="View Cart">
+                            <i class="simple-cart fa-solid fa-cart-shopping"></i>
+                            <span id="cart-count">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main>
+            <div class="auth-container-wrapper">
+                <div class="auth-container">
+
+                    <!-- Login Form Section (Visible by default) -->
+                    <section id="login-section" class="form-section">
+                        <h2 class="auth-title">Login</h2>
+                        <form id="login-form">
+                            <div class="form-group">
+                                <label for="login-email" class="form-label">Email Address</label>
+                                <input type="email" id="login-email" class="form-input" required autocomplete="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password" class="form-label">Password</label>
+                                <input type="password" id="login-password" class="form-input" required autocomplete="current-password">
+                            </div>
+                            <!-- Optional: Remember me, Forgot password -->
+                            <button type="submit" class="auth-button">Login</button>
+                        </form>
+                        <p class="toggle-auth-text">
+                            Don't have an account? <a href="#" id="show-register-link" class="toggle-auth-link">Register here</a>
+                        </p>
+                    </section>
+
+                    <!-- Register Form Section (Hidden by default) -->
+                    <section id="register-section" class="form-section hidden">
+                         <h2 class="auth-title">Register</h2>
+                         <form id="register-form">
+                            <div class="form-group">
+                                <label for="register-name" class="form-label">Full Name</label>
+                                <input type="text" id="register-name" class="form-input" required autocomplete="name">
+                            </div>
+                             <div class="form-group">
+                                 <label for="register-email" class="form-label">Email Address</label>
+                                 <input type="email" id="register-email" class="form-input" required autocomplete="email">
+                             </div>
+                             <div class="form-group">
+                                 <label for="register-password" class="form-label">Password</label>
+                                 <input type="password" id="register-password" class="form-input" required autocomplete="new-password" minlength="6">
+                                 <!-- Add minlength or other password requirements -->
+                             </div>
+                              <div class="form-group">
+                                 <label for="register-confirm-password" class="form-label">Confirm Password</label>
+                                 <input type="password" id="register-confirm-password" class="form-input" required autocomplete="new-password">
+                             </div>
+                             <button type="submit" class="auth-button">Register</button>
+                         </form>
+                         <p class="toggle-auth-text">
+                             Already have an account? <a href="#" id="show-login-link" class="toggle-auth-link">Login here</a>
+                         </p>
+                    </section>
+
+                    <!-- Feedback Area (Optional, if not using toast) -->
+                    <!-- <div id="auth-message"></div> -->
+
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer (Copied) -->
+        <footer class="footer">
+            <div class="container">
+                 <p>© <span id="currentYear">...</span> Home Cooked Meals. All rights reserved.</p>
+                <nav class="footer-nav">
+                    <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div> <!-- End div.home -->
+
+    <!-- Scripts -->
+    <script src="js/header_auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth_app.js"></script> <!-- NEW JS file -->
+    <script src="js/script.js"></script> <!-- Shared functions (toast, footer year, cart count) -->
+</body>
+</html>

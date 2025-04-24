@@ -23,17 +23,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const DEFAULT_IMAGE = 'https://via.placeholder.com/600x400/cccccc/969696?text=No+Image+Available'; // Larger default
 
     // --- Helper Functions --- (Keep formatPrice, createSpecialCardHTML, createTasteOfDayCardHTML, createCarouselSlideHTML, renderList as they were)
-        function formatPrice(priceInCents) {
-            if (typeof priceInCents !== 'number' || isNaN(priceInCents)) { return "$?.??"; }
-            const dollars = Math.floor(priceInCents / 100);
-            return `$${dollars.toLocaleString('en-US')}`;
-        }
+    function formatPrice(priceInCents) {
+        if (typeof priceInCents !== 'number' || isNaN(priceInCents)) { return "$?.??"; }
+        const dollars = Math.floor(priceInCents / 100);
+        return `$${dollars.toLocaleString('en-US')}`;
+    }
 
-        function createSpecialCardHTML(meal) {
-            const imageUrl = meal.imageUrl || DEFAULT_IMAGE;
-            // This structure matches the old UI's .card structure + Add button
-            return `
+    function createSpecialCardHTML(meal) {
+        const imageUrl = meal.imageUrl || DEFAULT_IMAGE;
+        const detailPageUrl = `meal.html?id=${meal.id}`; // Construct detail page URL
+        // This structure matches the old UI's .card structure + Add button
+        return `
                 <div class="card">
+                <a href="${detailPageUrl}" class="card-link-wrapper">
                     <div class="card-image-container">
                         <img src="${imageUrl}" alt="${meal.name || 'Special Meal'}">
                         <div class="card-icons">
@@ -46,13 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="item-price">${formatPrice(meal.price)}</span>
                         
                     </div>
+                    </a>
                 </div>
             `;
-        }
+    }
 
-        function createTasteOfDayCardHTML(meal) {
-            const imageUrl = meal.imageUrl || DEFAULT_IMAGE;
-            return `
+    function createTasteOfDayCardHTML(meal) {
+        const imageUrl = meal.imageUrl || DEFAULT_IMAGE;
+        const detailPageUrl = `meal.html?id=${meal.id}`; // Construct detail page URL
+        return `
+        <a href="${detailPageUrl}" class="card-link-wrapper">
                 <div class="menu-card-large">
                     <div class="mcl-image-container">
                         <img src="${imageUrl}" alt="${meal.name || 'Today\'s Meal'}" class="mcl-image">
@@ -74,12 +79,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                 </div>
+                </a>
             `;
-        }
+    }
 
-        function createCarouselSlideHTML(meal, isActive = false) {
-            const imageUrl = meal.imageUrl || DEFAULT_IMAGE;
-            return `
+    function createCarouselSlideHTML(meal, isActive = false) {
+        const imageUrl = meal.imageUrl || DEFAULT_IMAGE;
+        return `
                 <div class="carousel-slide ${isActive ? 'active' : ''}">
                   <img
                     class="carousel-img-element"
@@ -88,28 +94,28 @@ document.addEventListener('DOMContentLoaded', () => {
                   />
                 </div>
             `;
-        }
+    }
 
-        function renderList(items, container, itemCreatorFunction, notFoundMessage = "No items found.", sectionName) {
-            if (!container) { console.error(`APP: (${sectionName}) Container element not found for rendering.`); return; }
-            console.log(`APP: (${sectionName}) Rendering list. Items received count: ${items?.length}`);
+    function renderList(items, container, itemCreatorFunction, notFoundMessage = "No items found.", sectionName) {
+        if (!container) { console.error(`APP: (${sectionName}) Container element not found for rendering.`); return; }
+        console.log(`APP: (${sectionName}) Rendering list. Items received count: ${items?.length}`);
 
-            try {
-                container.innerHTML = ''; // Clear previous content or loading message
-                if (items && items.length > 0) {
-                    let generatedHTML = '';
-                    items.forEach(item => { generatedHTML += itemCreatorFunction(item); });
-                    container.innerHTML = generatedHTML;
-                    console.log(`APP: (${sectionName}) Rendered ${items.length} items.`);
-                } else {
-                    console.log(`APP: (${sectionName}) No items found or items array empty. Displaying message.`);
-                    container.innerHTML = `<p>${notFoundMessage}</p>`;
-                }
-            } catch (error) {
-                console.error(`APP: (${sectionName}) Error during rendering list:`, error);
-                container.innerHTML = `<p style="color:red;">Error rendering ${sectionName}. Please check console.</p>`;
+        try {
+            container.innerHTML = ''; // Clear previous content or loading message
+            if (items && items.length > 0) {
+                let generatedHTML = '';
+                items.forEach(item => { generatedHTML += itemCreatorFunction(item); });
+                container.innerHTML = generatedHTML;
+                console.log(`APP: (${sectionName}) Rendered ${items.length} items.`);
+            } else {
+                console.log(`APP: (${sectionName}) No items found or items array empty. Displaying message.`);
+                container.innerHTML = `<p>${notFoundMessage}</p>`;
             }
+        } catch (error) {
+            console.error(`APP: (${sectionName}) Error during rendering list:`, error);
+            container.innerHTML = `<p style="color:red;">Error rendering ${sectionName}. Please check console.</p>`;
         }
+    }
 
     // --- Cart and Subscribe Functions ---
     function updateCartCount() {
@@ -133,9 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (button) {
             const mealId = button.dataset.mealId;
             if (!mealId) {
-                 console.error("APP: Add to cart button clicked, but data-meal-id attribute is missing.");
-                 showToast("Error: Could not identify the meal.", 'error'); // Use toast for error
-                 return;
+                console.error("APP: Add to cart button clicked, but data-meal-id attribute is missing.");
+                showToast("Error: Could not identify the meal.", 'error'); // Use toast for error
+                return;
             }
             console.log(`APP: Adding meal ${mealId} to cart via button click.`);
             try {
@@ -184,12 +190,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 showToast(response.body.message || 'Subscription successful!', 'success');
                 subscribeEmailInput.value = ''; // Clear input on success
             } else {
-                 // Use toast for API error
+                // Use toast for API error
                 showToast(`Error: ${response.body.message || 'Could not subscribe.'}`, 'error');
             }
         } catch (error) {
             console.error("APP: Error during subscription API call:", error);
-             // Use toast for unexpected errors
+            // Use toast for unexpected errors
             showToast('An unexpected error occurred. Please try again later.', 'error');
         } finally {
             if (submitButton) submitButton.disabled = false; // Re-enable button
@@ -218,61 +224,61 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log(`APP: Featured meals data received: ${featuredMeals.length} items.`);
 
                 // Clear only the placeholder, keep controls/dots structure
-                if(placeholder) placeholder.remove();
+                if (placeholder) placeholder.remove();
                 // Remove any old slides if this function runs again
                 carouselContainer.querySelectorAll('.carousel-slide').forEach(slide => slide.remove());
 
                 if (featuredMeals.length > 0) {
-                     let slidesHTML = '';
-                     featuredMeals.forEach((meal, index) => {
-                         slidesHTML += createCarouselSlideHTML(meal, index === 0); // First slide is active
-                     });
-                     console.log("APP: Generated Carousel Slides HTML (first 100 chars):", slidesHTML.substring(0, 100));
+                    let slidesHTML = '';
+                    featuredMeals.forEach((meal, index) => {
+                        slidesHTML += createCarouselSlideHTML(meal, index === 0); // First slide is active
+                    });
+                    console.log("APP: Generated Carousel Slides HTML (first 100 chars):", slidesHTML.substring(0, 100));
 
-                     // Insert slides *before* the first control element (or append if none found)
-                     const firstControl = carouselContainer.querySelector('.carousel-arrow, .pagination-dot-group');
-                     if (firstControl) {
-                         firstControl.insertAdjacentHTML('beforebegin', slidesHTML);
-                         console.log("APP: Inserted slides before controls.");
-                     } else {
-                          // Append slides directly if controls weren't found (shouldn't happen with static HTML)
-                          carouselContainer.insertAdjacentHTML('beforeend', slidesHTML);
-                          console.warn("APP: Appended slides (fallback - controls/dots might be missing).");
-                     }
+                    // Insert slides *before* the first control element (or append if none found)
+                    const firstControl = carouselContainer.querySelector('.carousel-arrow, .pagination-dot-group');
+                    if (firstControl) {
+                        firstControl.insertAdjacentHTML('beforebegin', slidesHTML);
+                        console.log("APP: Inserted slides before controls.");
+                    } else {
+                        // Append slides directly if controls weren't found (shouldn't happen with static HTML)
+                        carouselContainer.insertAdjacentHTML('beforeend', slidesHTML);
+                        console.warn("APP: Appended slides (fallback - controls/dots might be missing).");
+                    }
 
-                     // **** IMPORTANT: Initialize Carousel AFTER slides are in the DOM ****
-                     if (typeof window.initializeCarousel === 'function') {
-                         console.log("APP: Calling window.initializeCarousel()...");
-                         window.initializeCarousel();
-                     } else {
-                         console.error("APP: window.initializeCarousel is not defined! Make sure script.js loaded correctly and defines it.");
-                     }
+                    // **** IMPORTANT: Initialize Carousel AFTER slides are in the DOM ****
+                    if (typeof window.initializeCarousel === 'function') {
+                        console.log("APP: Calling window.initializeCarousel()...");
+                        window.initializeCarousel();
+                    } else {
+                        console.error("APP: window.initializeCarousel is not defined! Make sure script.js loaded correctly and defines it.");
+                    }
 
-                     console.log("APP: loadFeaturedMeals finished rendering slides and triggered initialization.");
+                    console.log("APP: loadFeaturedMeals finished rendering slides and triggered initialization.");
 
                 } else {
-                     console.log("APP: No featured meals found in API response body.");
-                     carouselContainer.insertAdjacentHTML('afterbegin', '<p>No featured meals available right now.</p>');
-                     // Ensure controls/dots remain hidden if no slides
-                     controlsAndDots.forEach(el => el.style.display = 'none');
+                    console.log("APP: No featured meals found in API response body.");
+                    carouselContainer.insertAdjacentHTML('afterbegin', '<p>No featured meals available right now.</p>');
+                    // Ensure controls/dots remain hidden if no slides
+                    controlsAndDots.forEach(el => el.style.display = 'none');
                 }
             } else {
                 console.error("APP: Failed to load featured meals or invalid body. Status:", response.status, "Body:", response.body);
-                 if(placeholder) placeholder.remove();
-                 carouselContainer.insertAdjacentHTML('afterbegin', `<p>Error loading featured meals: ${response.body?.message || `Status ${response.status}`}</p>`);
-                 // Ensure controls/dots remain hidden on error
-                 controlsAndDots.forEach(el => el.style.display = 'none');
+                if (placeholder) placeholder.remove();
+                carouselContainer.insertAdjacentHTML('afterbegin', `<p>Error loading featured meals: ${response.body?.message || `Status ${response.status}`}</p>`);
+                // Ensure controls/dots remain hidden on error
+                controlsAndDots.forEach(el => el.style.display = 'none');
             }
         } catch (error) {
             console.error("APP: Error fetching or rendering featured meals:", error);
-            if(placeholder) placeholder.remove();
+            if (placeholder) placeholder.remove();
             carouselContainer.insertAdjacentHTML('afterbegin', `<p style="color:red;">An error occurred while loading featured meals.</p>`);
-             // Ensure controls/dots remain hidden on error
-             controlsAndDots.forEach(el => el.style.display = 'none');
+            // Ensure controls/dots remain hidden on error
+            controlsAndDots.forEach(el => el.style.display = 'none');
         } finally {
-             console.log("APP: loadFeaturedMeals execution complete.");
-             // You could double-check the final HTML structure here if needed
-             // console.log("APP: Final Carousel Container innerHTML:", carouselContainer.innerHTML);
+            console.log("APP: loadFeaturedMeals execution complete.");
+            // You could double-check the final HTML structure here if needed
+            // console.log("APP: Final Carousel Container innerHTML:", carouselContainer.innerHTML);
         }
     }
 
@@ -296,13 +302,13 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("APP: Error fetching or rendering specials:", error);
             specialsGrid.innerHTML = `<p style="color:red;">An error occurred while loading specials.</p>`;
         } finally {
-             console.log("APP: loadSpecials execution complete.");
+            console.log("APP: loadSpecials execution complete.");
         }
     }
 
     async function loadTasteOfDay() {
         console.log("APP: Starting loadTasteOfDay...");
-         if (!tasteOfDayGrid) { console.error("APP: Taste of Day grid not found."); return; }
+        if (!tasteOfDayGrid) { console.error("APP: Taste of Day grid not found."); return; }
         tasteOfDayGrid.innerHTML = "<p>Loading today's tastes...</p>"; // Loading state
 
         try {
@@ -310,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`APP: TasteOfDay API Response (Category ${TASTE_OF_DAY_CATEGORY_ID}):`, response);
 
             if (response.status === 200 && response.body && Array.isArray(response.body)) {
-                 console.log(`APP: Taste of Day data received: ${response.body.length} items.`);
+                console.log(`APP: Taste of Day data received: ${response.body.length} items.`);
                 renderList(response.body, tasteOfDayGrid, createTasteOfDayCardHTML, "No 'Taste of the Day' meals set.", "TasteOfDay");
             } else {
                 console.error("APP: Failed to load taste of day or invalid body. Status:", response.status, "Body:", response.body);
@@ -320,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("APP: Error fetching or rendering taste of day:", error);
             tasteOfDayGrid.innerHTML = `<p style="color:red;">An error occurred while loading the taste of the day.</p>`;
         } finally {
-             console.log("APP: loadTasteOfDay execution complete.");
+            console.log("APP: loadTasteOfDay execution complete.");
         }
     }
 
@@ -338,11 +344,11 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("APP: All loading functions completed.");
             updateCartCount(); // Update cart count once after initial loads
         } catch (error) {
-             console.error("APP: Error during initializePage (Promise.all):", error);
-             // Display a general error message?
-             showToast("Error loading page content.", 'error');
+            console.error("APP: Error during initializePage (Promise.all):", error);
+            // Display a general error message?
+            showToast("Error loading page content.", 'error');
         } finally {
-             console.log("APP: initializePage function finished.");
+            console.log("APP: initializePage function finished.");
         }
     }
 
