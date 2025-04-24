@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Cooked Meals</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="public/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <script src="js/api.js"></script> 
+    <div class="home">
+      <header class="header">
+        <div class="container">
+          <div class="logo-container">
+            <i class="logo-icon fa-solid fa-leaf"></i>
+            <span class="logo-text">Home Cooked Meals</span>
+          </div>
+          <div class="nav-cart-container">
+            <nav class="navigation">
+              <ul class="navigation-pill-list">
+                <li><a href="#" class="navigation-pill active">Home</a></li>
+                <li><a href="#" class="navigation-pill">Menu</a></li>
+                <li><a href="#" class="navigation-pill">Locations</a></li>
+                <li><a href="#" class="navigation-pill">Login</a></li>
+              </ul>
+            </nav>
+            <div class="cart-container">
+              <i class="simple-cart fa-solid fa-cart-shopping"></i>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <!-- Carousel Section -->
+        <section class="carousel-section">
+          <div class="carousel-image" id="carouselContainer">
+            <div class="carousel-slide active">
+              <img
+                class="carousel-img-element"
+                src="https://img.hellofresh.com/w_3840,q_auto,f_auto,c_limit,fl_lossy/hellofresh_website/us/lp/meals/Pescatarian-meal-ginger-turmeric-tilapia-082019.jpg"
+                alt="Featured Meal 1"
+              />
+            </div>
+            <div class="carousel-slide">
+              <img
+                class="carousel-img-element"
+                src="https://iconiclife.com/wp-content/uploads/2020/04/home-cooked-food-delivery-service-by-Matha-and-Marley.jpeg"
+                alt="Featured Meal 2"
+              />
+            </div>
+            <div class="carousel-slide">
+              <img
+                class="carousel-img-element"
+                src="https://cdn.pixabay.com/photo/2021/01/16/09/05/meal-5921491_1280.jpg"
+                alt="Featured Meal 3"
+              />
+            </div>
+            <button type="button" class="carousel-arrow prev" id="prevBtn">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button type="button" class="carousel-arrow next" id="nextBtn">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <div class="pagination-dot-group" id="paginationDots"></div>
+          </div>
+        </section>
+
+        <!-- Specials Section -->
+        <section class="specials-section content-section">
+          <div class="container">
+            <!-- MODIFIED: Title styling handled by CSS -->
+            <h2 class="section-title specials-title">Specials</h2>
+            <!-- REMOVED: specials-underline div -->
+            <div class="specials-grid">
+              <div class="card">
+                <div class="card-image-container">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCFLjen7wiNyQSM8jBAIRMyYcm9fO4EzlBYw&s"
+                    alt="Phantom Gainer"
+                  />
+                  <div class="card-icons">
+                    <i class="icon-button fa-regular fa-heart"></i>
+                    <i class="icon-button fa-regular fa-bookmark"></i>
+                  </div>
+                </div>
+                <div class="card-content">
+                  <span class="item-name">Phantom Gainer</span>
+                  <span class="item-price">$1,449</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-image-container">
+                  <img
+                    src="https://img.hellofresh.com/w_3840,q_auto,f_auto,c_limit,fl_lossy/hellofresh_website/us/lp/meals/Pescatarian-meal-ginger-turmeric-tilapia-082019.jpg"
+                    alt="Sea Food"
+                  />
+                  <div class="card-icons">
+                    <i class="icon-button fa-regular fa-heart"></i>
+                    <i class="icon-button fa-regular fa-bookmark"></i>
+                  </div>
+                </div>
+                <div class="card-content">
+                  <span class="item-name">Sea Food</span>
+                  <span class="item-price">$2,449</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-image-container">
+                  <img
+                    src="https://cravinghomecooked.com/wp-content/uploads/2022/03/creamy-herb-chicken-1-2-750x750.jpg.webp"
+                    alt="Rattatouli"
+                  />
+                  <div class="card-icons">
+                    <i class="icon-button fa-regular fa-heart"></i>
+                    <i class="icon-button fa-regular fa-bookmark"></i>
+                  </div>
+                </div>
+                <div class="card-content">
+                  <span class="item-name">Rattatouli</span>
+                  <span class="item-price">$9,449</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-image-container">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMLnfREQY7d9ndEwd0dwVES4GZumeKknYIUA&s"
+                    alt="GT Hallal Samon Grilled"
+                  />
+                  <div class="card-icons">
+                    <i class="icon-button fa-regular fa-heart"></i>
+                    <i class="icon-button fa-regular fa-bookmark"></i>
+                  </div>
+                </div>
+                <div class="card-content">
+                  <span class="item-name">GT Hallal Samon Grilled</span>
+                  <span class="item-price">$1,449</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Today's Menu Section -->
+        <section class="todays-menu-section content-section alt-bg">
+          <div class="container">
+              <div class="title-date-wrapper">
+                  <h2 class="section-title todays-menu-title">Taste of Today</h2>
+                  <p class="todays-date" id="todays-date-formatted">Loading date...</p>
+              </div>
+              <!-- Grid container remains -->
+              <div class="menu-item-grid">
+                  <!-- NEW Card Structure -->
+                  <div class="menu-card-large">
+                      <div class="mcl-image-container">
+                          <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Jerk Chicken Supreme" class="mcl-image">
+                          <!-- Optional Icons within image container -->
+                          <div class="mcl-icons">
+                              <i class="icon-button fa-regular fa-heart"></i>
+                              <i class="icon-button fa-regular fa-bookmark"></i>
+                          </div>
+                      </div>
+                      <div class="mcl-content-container">
+                          <h4 class="mcl-name">Jerk Chicken Supreme</h4>
+                          <p class="mcl-description">
+                              Authentic smoky jerk chicken, marinated for 24 hours in our secret blend of spices, served with rice and peas and a side of plantain.
+                          </p>
+                          <div class="mcl-footer">
+                              <span class="mcl-price">$2,500</span>
+                              <button class="mcl-add-button">
+                                  Add <i class="fa-solid fa-cart-plus"></i>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="menu-card-large">
+                      <div class="mcl-image-container">
+                          <img src="https://www.melskitchencafe.com/wp-content/uploads/2023/02/creamy-garlic-shrimp-pasta11.jpg" class="mcl-image">
+                          <div class="mcl-icons">
+                               <i class="icon-button fa-regular fa-heart"></i>
+                               <i class="icon-button fa-regular fa-bookmark"></i>
+                          </div>
+                      </div>
+                       <div class="mcl-content-container">
+                           <h4 class="mcl-name">Creamy Garlic Shrimp Pasta</h4>
+                           <p class="mcl-description">
+                              Succulent shrimp sautéed with garlic and herbs, tossed in a rich, creamy parmesan sauce with fettuccine pasta. Served with garlic bread.
+                           </p>
+                           <div class="mcl-footer">
+                               <span class="mcl-price">$2,800</span>
+                               <button class="mcl-add-button">
+                                   Add <i class="fa-solid fa-cart-plus"></i>
+                               </button>
+                           </div>
+                       </div>
+                  </div>
+
+                  <div class="menu-card-large">
+                       <div class="mcl-image-container">
+                          <img src="https://veganonboard.com/wp-content/uploads/2022/11/vegan-lentil-shepherds-pie-17-500x375.jpg" alt="Vegan Lentil Shepherd's Pie" class="mcl-image">
+                          <div class="mcl-icons">
+                               <i class="icon-button fa-regular fa-heart"></i>
+                               <i class="icon-button fa-regular fa-bookmark"></i>
+                          </div>
+                       </div>
+                       <div class="mcl-content-container">
+                           <h4 class="mcl-name">Vegan Lentil Shepherd's Pie</h4>
+                           <p class="mcl-description">
+                               A hearty filling of lentils, carrots, peas, and corn in a savory gravy, topped with a fluffy sweet potato mash. Plant-based classic.
+                           </p>
+                           <div class="mcl-footer">
+                               <span class="mcl-price">$2,200</span>
+                               <button class="mcl-add-button">
+                                    Add <i class="fa-solid fa-cart-plus"></i>
+                               </button>
+                           </div>
+                       </div>
+                   </div>
+
+                   <div class="menu-card-large">
+                       <div class="mcl-image-container">
+                          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Classic Beef Burger" class="mcl-image">
+                          <div class="mcl-icons">
+                               <i class="icon-button fa-regular fa-heart"></i>
+                               <i class="icon-button fa-regular fa-bookmark"></i>
+                          </div>
+                       </div>
+                       <div class="mcl-content-container">
+                           <h4 class="mcl-name">Classic Beef Burger</h4>
+                           <p class="mcl-description">
+                              Juicy grilled beef patty, lettuce, tomato, onion, pickles, and our signature sauce on a toasted brioche bun. Served with crispy fries.
+                           </p>
+                           <div class="mcl-footer">
+                               <span class="mcl-price">$1,900</span>
+                               <button class="mcl-add-button">
+                                    Add <i class="fa-solid fa-cart-plus"></i>
+                               </button>
+                           </div>
+                       </div>
+                   </div>
+                  <!-- Add more items using menu-card-large structure -->
+
+              </div>
+          </div>
+      </section>
+
+        <!-- NEW: Subscribe Section -->
+        <section class="subscribe-section content-section">
+          <div class="container">
+            <h3 class="subscribe-title">Get Promo Deals!</h3>
+            <p class="subscribe-text">
+              Subscribe to our newsletter and be the first to know about
+              exclusive offers, new menu items, and special events.
+            </p>
+            <form class="subscribe-form">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                required
+                class="subscribe-input"
+              />
+              <button type="submit" class="subscribe-button">Subscribe</button>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <p>
+            © <span id="currentYear"></span> Home Cooked Meals. All rights
+            reserved.
+          </p>
+          <nav class="footer-nav">
+            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

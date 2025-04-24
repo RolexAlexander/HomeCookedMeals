@@ -1,0 +1,32 @@
+[
+    {
+        "id": "cat_special",
+        "name": "Chef's Specials",
+        "description": "Unique creations and limited-time offers from our chef."
+    },
+    {
+        "id": "cat_today",
+        "name": "Taste of the Day",
+        "description": "Featured dishes highlighting today's freshest ingredients."
+    },
+    {
+        "id": "cat_main",
+        "name": "Main Courses",
+        "description": "Hearty and satisfying main dishes."
+    },
+    {
+        "id": "cat_appetizer",
+        "name": "Appetizers",
+        "description": "Perfect starters to whet your appetite."
+    },
+    {
+        "id": "cat_dessert",
+        "name": "Desserts",
+        "description": "Sweet endings to your meal."
+    },
+    {
+        "id": "cat_vegan",
+        "name": "Vegan Options",
+        "description": "Delicious plant-based meals."
+    }
+]
