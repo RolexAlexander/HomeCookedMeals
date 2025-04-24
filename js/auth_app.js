@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (Api.isLoggedIn()) {
         console.log("AUTH_APP: User already logged in. Redirecting to home.");
         // Redirect away from auth page if logged in
-        window.location.replace('/'); // Use replace to avoid history entry
+        window.location.replace('index.html'); // Use replace to avoid history entry
         return; // Stop further execution
     }
 
