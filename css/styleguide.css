@@ -1,121 +1,79 @@
-/* Typography */
-.text-wrapper {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #333;
+:root {
+    --mid-gray-mid-gray-1: rgba(91, 104, 113, 1);
+    --dark-gray-dark-gray-2: rgba(37, 44, 50, 1);
+    --white: rgba(255, 255, 255, 1);
+    --brand-500: rgba(158, 119, 237, 1);
+    --brand-700: rgba(105, 65, 198, 1);
+    --black-white-white: rgba(255, 255, 255, 1);
+    --single-line-body-base-font-family: "Inter", Helvetica;
+    --single-line-body-base-font-weight: 400;
+    --single-line-body-base-font-size: 16px;
+    --single-line-body-base-letter-spacing: 0px;
+    --single-line-body-base-line-height: 100%;
+    --single-line-body-base-font-style: normal;
+    --f3-light-0-font-family: "Source Sans Pro", Helvetica;
+    --f3-light-0-font-weight: 300;
+    --f3-light-0-font-size: 26px;
+    --f3-light-0-letter-spacing: 0px;
+    --f3-light-0-line-height: 32px;
+    --f3-light-0-font-style: normal;
+    --h4-font-family: "Inter", Helvetica;
+    --h4-font-weight: 600;
+    --h4-font-size: 32px;
+    --h4-letter-spacing: 0px;
+    --h4-line-height: 40px;
+    --h4-font-style: normal;
+    --UI-small-UI-text-12-reg-font-family: "Inter", Helvetica;
+    --UI-small-UI-text-12-reg-font-weight: 400;
+    --UI-small-UI-text-12-reg-font-size: 12px;
+    --UI-small-UI-text-12-reg-letter-spacing: 0px;
+    --UI-small-UI-text-12-reg-line-height: 16px;
+    --UI-small-UI-text-12-reg-font-style: normal;
+    --UI-UI-text-14-reg-font-family: "Inter", Helvetica;
+    --UI-UI-text-14-reg-font-weight: 400;
+    --UI-UI-text-14-reg-font-size: 14px;
+    --UI-UI-text-14-reg-letter-spacing: -0.0840000033378601px;
+    --UI-UI-text-14-reg-line-height: 24px;
+    --UI-UI-text-14-reg-font-style: normal;
+    --headings-heading-18-semi-bold-font-family: "Inter", Helvetica;
+    --headings-heading-18-semi-bold-font-weight: 600;
+    --headings-heading-18-semi-bold-font-size: 18px;
+    --headings-heading-18-semi-bold-letter-spacing: -0.2519999957084656px;
+    --headings-heading-18-semi-bold-line-height: 24px;
+    --headings-heading-18-semi-bold-font-style: normal;
+    --color-text-default-default: var(--color-primitives-gray-900);
+    --theme-neutral-1000: rgba(3, 2, 23, 1);
+    --color-primitives-gray-900: rgba(30, 30, 30, 1);
+    --color-primitives-white-1000: rgba(255, 255, 255, 1);
+    --size-space-200: 8px;
+    --size-radius-200: 8px;
   }
   
-  .text-wrapper-2 {
-    font-size: 0.875rem;
-    color: #666;
+  /*
+  
+  To enable a theme in your HTML, simply add one of the following data attributes to an HTML element, like so:
+  
+  <body data-color-mode="SDS-light">
+      <!-- the rest of your content -->
+  </body>
+  
+  You can apply the theme on any DOM node, not just the `body`
+  
+  */
+  
+  [data-color-mode="SDS-light"] {
+    --color-text-default-default: var(--color-primitives-gray-900);
   }
   
-  .text-wrapper-3 {
-    font-size: 1.125rem;
-    font-weight: 500;
-    color: #333;
+  [data-color-mode="SDS-dark"] {
+    --color-text-default-default: var(--color-primitives-white-1000);
   }
   
-  .text-wrapper-4 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #333;
+  [data-theme-mode="light"] {
+    --theme-neutral-1000: rgba(3, 2, 23, 1);
   }
   
-  .title {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #333;
+  [data-theme-mode="dark"] {
+    --theme-neutral-1000: rgba(255, 255, 255, 1);
   }
   
-  .title-2 {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #333;
-    position: relative;
-  }
-  
-  /* Buttons */
-  .icon-button {
-    width: 40px;
-    height: 40px;
-    background-color: #fff;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .icon-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Navigation */
-  .navigation-pill {
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .navigation-pill:hover {
-    color: #666;
-  }
-  
-  /* Cards */
-  .card, .card-2, .card-3, .card-4 {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-  
-  .card:hover, .card-2:hover, .card-3:hover, .card-4:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Images */
-  .img, .img-2 {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-  
-  /* Pagination */
-  .pagination-dot {
-    width: 10px;
-    height: 10px;
-    background-color: #fff;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-  
-  .pagination-dot-2 {
-    width: 10px;
-    height: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    cursor: pointer;
-  }
-  
-  /* Carousel arrows */
-  .carousel-arrow {
-    width: 40px;
-    height: 40px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .carousel-arrow:hover {
-    background-color: #fff;
-  }
