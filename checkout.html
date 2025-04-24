@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Cooked Meals - Checkout</title>
+    <style>
+    
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+      }
+      
+      body {
+        background-image: url('https://tse3.mm.bing.net/th/id/OIP.a2rftMc_Ch00WvYslqg3cQHaFj?rs=1&pid=ImgDetMain');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      
+      .container {
+        width: 100%;
+        max-width: 1200px;
+      }
+      
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background-color: white;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+        font-size: 18px;
+      }
+      
+      .logo-circle {
+        width: 24px;
+        height: 24px;
+        border: 2px solid #333;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+      }
+      
+      nav {
+        display: flex;
+        gap: 20px;
+      }
+      
+      nav a {
+        text-decoration: none;
+        color: #333;
+        font-size: 14px;
+      }
+      
+      .cart-icon {
+        font-size: 18px;
+      }
+      
+      .checkout-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        padding: 30px;
+        width: 90%;
+        max-width: 800px;
+        margin: 20px auto;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+      
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 28px;
+        color: #333;
+      }
+      
+      .checkout-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      
+      .checkout-section {
+        background-color: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      }
+      
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+      }
+      
+      .section-title {
+        font-weight: bold;
+        font-size: 16px;
+      }
+      
+      .section-subtitle {
+        font-size: 12px;
+        color: #666;
+      }
+      
+      .dropdown-icon {
+        font-size: 12px;
+      }
+      
+      .order-item {
+        display: flex;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .item-image {
+        width: 25px;
+        height: 25px;
+        border-radius: 8px;
+        object-fit: cover;
+        margin-right: 10px;
+      }
+      
+      .item-details {
+        flex-grow: 1;
+      }
+      
+      .item-name {
+        font-size: 14px;
+        margin-bottom: 5px;
+      }
+      
+      .quantity-controls {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: fit-content;
+        margin-top: 5px;
+      }
+      
+      .quantity-btn {
+        background: none;
+        border: none;
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      
+      .quantity-display {
+        width: 24px;
+        text-align: center;
+        font-size: 14px;
+      }
+      
+      .remove-btn {
+        color: #999;
+        font-size: 14px;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      
+      .item-price {
+        text-align: right;
+        font-weight: bold;
+        font-size: 14px;
+      }
+      
+      .item-original-price {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 12px;
+        text-align: right;
+      }
+      
+      .billing-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+      
+      .billing-label {
+        color: #666;
+      }
+      
+      .billing-value-discount {
+        color: #e53935;
+      }
+      
+      .remove-link {
+        color: #1976d2;
+        font-size: 12px;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      
+      .grand-total {
+        border-top: 1px solid #ddd;
+        margin-top: 15px;
+        padding-top: 15px;
+        font-weight: bold;
+        font-size: 16px;
+      }
+      
+      .comment-input {
+        width: 100%;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 10px;
+        margin-top: 15px;
+        font-size: 14px;
+      }
+      
+      .checkbox-container {
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
+        font-size: 12px;
+      }
+      
+      input[type="checkbox"] {
+        margin-right: 8px;
+      }
+      
+      .privacy-link {
+        color: #1976d2;
+        text-decoration: none;
+      }
+      
+      .pay-button {
+        width: 100%;
+        background-color: #1976d2;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 12px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 15px;
+      }
+      
+      .norton-badge {
+        text-align: center;
+        margin-top: 10px;
+      }
+      
+      .delivery-options {
+        display: flex;
+        margin-top: 20px;
+      }
+      
+      .delivery-option {
+        flex: 1;
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #ddd;
+        cursor: pointer;
+      }
+      
+      .delivery-option.active {
+        background-color: #1976d2;
+        color: white;
+        border-color: #1976d2;
+      }
+      
+      .delivery-option:first-child {
+        border-radius: 4px 0 0 4px;
+      }
+      
+      .delivery-option:last-child {
+        border-radius: 0 4px 4px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">
+          <div class="logo-circle">⊙</div>
+          Home Cooked Meals
+        </div>
+        <nav>
+          <a href="#">Home</a>
+          <a href="#">Menu</a>
+          <a href="#">Locations</a>
+          <a href="#">Login</a>
+        </nav>
+        <div class="cart-icon">🛒</div>
+      </header>
+      
+      <div class="checkout-container">
+        <h1>Checkout</h1>
+        
+        <div class="checkout-grid">
+          <div class="checkout-section">
+            <div class="section-header">
+              <div>
+                <div class="section-title">Order Review</div>
+                <div class="section-subtitle">3 items in cart</div>
+              </div>
+              <div class="dropdown-icon">▼</div>
+            </div>
+            
+            <div class="order-items">
+                <div class="order-item">
+                    <img src="https://bing.com/th?id=OSK.3112109a51ef0f932f1d5d08fa491004" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; margin-right: 10px;">
+                    <div class="item-details">
+                        <div class="item-name">Instinctive Taste</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn">−</button>
+                            <div class="quantity-display">1</div>
+                            <button class="quantity-btn">+</button>
+                        </div>
+                    </div>
+                <div>
+                  <button class="remove-btn">✕</button>
+                  <div class="item-original-price">$245.78</div>
+                  <div class="item-price">$21,045</div>
+                </div>
+              </div>
+              
+              <div class="order-item">
+                <img src="https://th.bing.com/th/id/OIP.Fes2Jlg9U4_FqbWZXfWWgwHaE2?w=260&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Dubble Small Meat" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; margin-right: 10px;">
+                <div class="item-details">
+                    <div class="item-name">Dubble Small Meat</div>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">−</button>
+                        <div class="quantity-display">2</div>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                </div>
+                <div>
+                  <button class="remove-btn">✕</button>
+                  <div class="item-original-price">$245.78</div>
+                  <div class="item-price">$2,459</div>
+                </div>
+              </div>
+              
+              <div class="order-item">
+                <img src="https://bing.com/th?id=OSK.c229961ddf4098cd22233ca6ea565e90" alt="Grilled Pork" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; margin-right: 10px;">
+                <div class="item-details">
+                    <div class="item-name">Grilled Pork</div>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">−</button>
+                        <div class="quantity-display">4</div>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                </div>
+                <div>
+                  <button class="remove-btn">✕</button>
+                  <div class="item-original-price">$245.78</div>
+                  <div class="item-price">$5,245</div>
+                </div>
+              </div>
+              
+              <div class="order-item">
+                <img src="https://bing.com/th?id=OSK.5af47b44b071376169805f847fd224dd" alt="Grilled Pork" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; margin-right: 10px;">
+                <div class="item-details">
+                    <div class="item-name">Grilled Pork</div>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">−</button>
+                        <div class="quantity-display">4</div>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                </div>
+                <div>
+                  <button class="remove-btn">✕</button>
+                  <div class="item-original-price">$245.78</div>
+                  <div class="item-price">$3,245</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="delivery-options">
+              <div class="delivery-option active">Pick-up</div>
+              <div class="delivery-option">Delivery</div>
+            </div>
+          </div>
+          
+          <div class="checkout-section">
+            <div class="section-header">
+              <div class="section-title">Billing Summary</div>
+              <div class="dropdown-icon">▼</div>
+            </div>
+            
+            <div class="billing-summary">
+              <div class="billing-row">
+                <div class="billing-label">Subtotal</div>
+                <div class="billing-value">$3720.27</div>
+              </div>
+              
+              <div class="billing-row">
+                <div class="billing-label">Discount</div>
+                <div class="billing-value billing-value-discount">-$749.99</div>
+              </div>
+              
+              <div class="billing-row">
+                <div class="billing-label">Warranty (Platinum)</div>
+                <div>
+                  <div class="billing-value">$259.99</div>
+                  <div><a class="remove-link">Remove</a></div>
+                </div>
+              </div>
+              
+              <div class="billing-row">
+                <div class="billing-label">Shipping</div>
+                <div class="billing-value">$0.00</div>
+              </div>
+              
+              <div class="billing-row">
+                <div class="billing-label">Tax</div>
+                <div class="billing-value">$228.72</div>
+              </div>
+              
+              <div class="billing-row grand-total">
+                <div>Grand Total</div>
+                <div>$3,439.00</div>
+              </div>
+              
+              <input type="text" class="comment-input" placeholder="Type here...">
+              
+              <div class="checkbox-container">
+                <input type="checkbox" id="privacy" checked>
+                <label for="privacy">Please check to acknowledge our <a href="#" class="privacy-link">Privacy & Terms Policy</a></label>
+              </div>
+              
+              <button class="pay-button">Pay $3,439.00</button>
+              
+              <div class="norton-badge">
+                <img src="https://www.motivatemd.com/wp-content/uploads/2020/05/Norton-secured-logo-300x300.jpg" alt="Norton Secured" width="80">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
