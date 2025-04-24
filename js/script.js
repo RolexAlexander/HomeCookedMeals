@@ -1,181 +1,116 @@
+// Keep only ONE DOMContentLoaded listener
 document.addEventListener('DOMContentLoaded', () => {
+
     // --- Carousel Logic ---
     const carouselContainer = document.getElementById('carouselContainer');
-    const slides = carouselContainer.querySelectorAll('.carousel-slide');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const paginationDotsContainer = document.getElementById('paginationDots');
-
-    let currentSlideIndex = 0;
-    const totalSlides = slides.length;
-    let autoSlideInterval; // Variable to hold the interval timer
-    const autoSlideIntervalTime = 4000; // Time in ms (e.g., 4 seconds)
-
-    // --- Create pagination dots ---
-    if (totalSlides > 1 && paginationDotsContainer) {
-        slides.forEach((_, index) => {
-            const dot = document.createElement('span');
-            dot.classList.add('pagination-dot');
-            if (index === 0) {
-                dot.classList.add('active');
-            }
-            dot.addEventListener('click', () => {
-                goToSlide(index);
-                resetAutoSlideTimer(); // Reset timer on dot click
-            });
-            paginationDotsContainer.appendChild(dot);
-        });
-    }
-    const paginationDots = paginationDotsContainer ? paginationDotsContainer.querySelectorAll('.pagination-dot') : [];
-
-    // --- Carousel Update Function ---
-    function updateCarousel() {
-        // Update slides
-        slides.forEach((slide, index) => {
-            slide.classList.toggle('active', index === currentSlideIndex);
-        });
-
-        // Update pagination dots
-        if (paginationDots.length > 0) {
-            paginationDots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlideIndex);
-            });
-        }
-    }
-
-    // --- Navigation Functions ---
-    function goToSlide(index) {
-        currentSlideIndex = index;
-        updateCarousel();
-    }
-
-    function showNextSlide() {
-        currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
-        updateCarousel();
-    }
-
-    function showPrevSlide() {
-        currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
-        updateCarousel();
-    }
-
-    // --- Automatic Sliding Logic ---
-    function startAutoSlide() {
-        stopAutoSlide(); // Clear any existing interval first
-        if (totalSlides > 1) {
-           autoSlideInterval = setInterval(showNextSlide, autoSlideIntervalTime);
-        }
-    }
-
-    function stopAutoSlide() {
-        clearInterval(autoSlideInterval);
-    }
-
-    function resetAutoSlideTimer() {
-        stopAutoSlide();
-        startAutoSlide();
-    }
-
-    // --- Event Listeners ---
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            showNextSlide();
-            resetAutoSlideTimer(); // Reset timer on arrow click
-        });
-    }
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            showPrevSlide();
-            resetAutoSlideTimer(); // Reset timer on arrow click
-        });
-    }
-
-    // Pause auto-slide on hover
+    // Check if carouselContainer actually exists before querying inside it
     if (carouselContainer) {
-        carouselContainer.addEventListener('mouseenter', stopAutoSlide);
-        carouselContainer.addEventListener('mouseleave', startAutoSlide);
-    }
+        const slides = carouselContainer.querySelectorAll('.carousel-slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const paginationDotsContainer = document.getElementById('paginationDots');
 
-    // --- Initialize ---
-    if (slides.length > 0) {
-        updateCarousel(); // Show the initial slide
-        startAutoSlide();   // Start automatic sliding
-    }
+        let currentSlideIndex = 0;
+        const totalSlides = slides.length;
+        let autoSlideInterval;
+        const autoSlideIntervalTime = 4000;
 
-    // --- Footer Year ---
-    const currentYearSpan = document.getElementById('currentYear');
-    if (currentYearSpan) {
-        currentYearSpan.textContent = new Date().getFullYear();
-    }
-});
+        // --- Create pagination dots ---
+        if (totalSlides > 1 && paginationDotsContainer) {
+            // Clear container first to be safe
+            paginationDotsContainer.innerHTML = '';
 
-document.addEventListener('DOMContentLoaded', () => {
-    // --- Carousel Logic (Keep existing code) ---
-    const carouselContainer = document.getElementById('carouselContainer');
-    const slides = carouselContainer.querySelectorAll('.carousel-slide');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const paginationDotsContainer = document.getElementById('paginationDots');
-    let currentSlideIndex = 0;
-    const totalSlides = slides.length;
-    let autoSlideInterval;
-    const autoSlideIntervalTime = 4000;
+            slides.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.classList.add('pagination-dot');
+                if (index === 0) {
+                    dot.classList.add('active');
+                }
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                    resetAutoSlideTimer();
+                });
+                paginationDotsContainer.appendChild(dot);
+            });
+        }
+        // Select dots *after* they are created
+        const paginationDots = paginationDotsContainer ? paginationDotsContainer.querySelectorAll('.pagination-dot') : [];
 
-    if (totalSlides > 1 && paginationDotsContainer) {
-        slides.forEach((_, index) => {
-            const dot = document.createElement('span');
-            dot.classList.add('pagination-dot');
-            if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => {
-                goToSlide(index);
+        // --- Carousel Update Function ---
+        function updateCarousel() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlideIndex);
+            });
+            if (paginationDots.length > 0) {
+                paginationDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlideIndex);
+                });
+            }
+        }
+
+        // --- Navigation Functions ---
+        function goToSlide(index) {
+            // Ensure index is within bounds (though modulo should handle this)
+            if (index >= 0 && index < totalSlides) {
+                currentSlideIndex = index;
+                updateCarousel();
+            }
+        }
+
+        function showNextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function showPrevSlide() {
+            currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        // --- Automatic Sliding Logic ---
+        function startAutoSlide() {
+            stopAutoSlide();
+            if (totalSlides > 1) {
+               autoSlideInterval = setInterval(showNextSlide, autoSlideIntervalTime);
+            }
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        function resetAutoSlideTimer() {
+            stopAutoSlide();
+            startAutoSlide();
+        }
+
+        // --- Event Listeners ---
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                showNextSlide();
                 resetAutoSlideTimer();
             });
-            paginationDotsContainer.appendChild(dot);
-        });
-    }
-    const paginationDots = paginationDotsContainer ? paginationDotsContainer.querySelectorAll('.pagination-dot') : [];
-
-    function updateCarousel() {
-        slides.forEach((slide, index) => {
-            slide.classList.toggle('active', index === currentSlideIndex);
-        });
-        if (paginationDots.length > 0) {
-            paginationDots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlideIndex);
+        }
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                showPrevSlide();
+                resetAutoSlideTimer();
             });
         }
-    }
-    function goToSlide(index) {
-        currentSlideIndex = index;
-        updateCarousel();
-    }
-    function showNextSlide() {
-        currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
-        updateCarousel();
-    }
-    function showPrevSlide() {
-        currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
-        updateCarousel();
-    }
-    function startAutoSlide() {
-        stopAutoSlide();
-        if (totalSlides > 1) {
-           autoSlideInterval = setInterval(showNextSlide, autoSlideIntervalTime);
-        }
-    }
-    function stopAutoSlide() { clearInterval(autoSlideInterval); }
-    function resetAutoSlideTimer() { stopAutoSlide(); startAutoSlide(); }
 
-    if (nextBtn) { nextBtn.addEventListener('click', () => { showNextSlide(); resetAutoSlideTimer(); }); }
-    if (prevBtn) { prevBtn.addEventListener('click', () => { showPrevSlide(); resetAutoSlideTimer(); }); }
-    if (carouselContainer) {
+        // Pause auto-slide on hover
         carouselContainer.addEventListener('mouseenter', stopAutoSlide);
         carouselContainer.addEventListener('mouseleave', startAutoSlide);
-    }
-    if (slides.length > 0) { updateCarousel(); startAutoSlide(); }
 
+        // --- Initialize ---
+        if (slides.length > 0) {
+            updateCarousel();
+            startAutoSlide();
+        }
 
-    // --- Today's Menu Date Logic (Keep this) ---
+    } // End of check for carouselContainer
+
+    // --- Today's Menu Date Logic ---
     const dateDisplayElement = document.getElementById('todays-date-formatted');
     if (dateDisplayElement) {
         try {
@@ -201,12 +136,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- REMOVED Menu Item Modal Logic ---
-    // All code related to opening/closing the modal is gone.
-
-    // --- Footer Year (Keep existing code) ---
+    // --- Footer Year ---
     const currentYearSpan = document.getElementById('currentYear');
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
     }
-});
+
+}); // End of the single DOMContentLoaded listener
