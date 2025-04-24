@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gourmet Egg Spread - Home Cooked Meals</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header and Navigation */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 35px;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .navigation-pill-list {
+      display: flex;
+      gap: 20px;
+    }
+
+    .navigation-pill {
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .navigation-pill:hover {
+      background-color: #f0f0f0;
+    }
+
+    .cart-icon {
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 400px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    /* Product Details Section */
+    .product-details {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .product-info {
+      flex: 2;
+      min-width: 300px;
+    }
+
+    .product-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .product-subtitle {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .product-price {
+      font-size: 28px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .action-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .ratings {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 25px;
+    }
+
+    .star {
+      color: #f1c40f;
+      font-size: 20px;
+    }
+
+    .product-description {
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    /* Order Section */
+    .order-section {
+      flex: 1;
+      min-width: 250px;
+      background-color: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      height: fit-content;
+    }
+
+    .quantity-label {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .quantity-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .quantity-display {
+      font-size: 24px;
+      font-weight: 600;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    .checkout-button {
+      width: 100%;
+      padding: 15px;
+      border-radius: 30px;
+      background-color: #8445dd;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .checkout-button:hover {
+      background-color: #7335cc;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      background-color: white;
+      border-radius: 50%;
+    }
+
+    /* Reviews Section */
+    .reviews-section {
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+
+    .reviews-heading {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .review-card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .review-rating {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 15px;
+    }
+
+    .review-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .review-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .reviewer-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+    }
+
+    .reviewer-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .reviewer-name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .review-date {
+      font-size: 12px;
+      color: #777;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .product-details {
+        flex-direction: column;
+      }
+
+      .hero-image {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header with Navigation -->
+    <header>
+      <div class="logo">
+        <img src="https://res.cloudinary.com/dg0m1wsvu/image/upload/f_auto,q_auto/v1670960629/components/benefits-icons/icon-vegan-friendly.svg" alt="Home Cooked Meals Logo">
+        <div class="logo-text">Home Cooked Meals</div>
+      </div>
+      
+      <div class="navigation-pill-list">
+        <div class="navigation-pill">Home</div>
+        <div class="navigation-pill">Menu</div>
+        <div class="navigation-pill">Locations</div>
+        <div class="navigation-pill">Login</div>
+      </div>
+      
+      <div class="cart-icon">
+        <img src="https://th.bing.com/th/id/OIP.QpDEV7TvCm2ditZIi2i3CgHaHa?rs=1&pid=ImgDetMain" alt="Cart" width="60" height="60"> 
+      </div>
+    </header>
+    
+    <!-- Hero Image -->
+    <section class="hero-section">
+      <img class="hero-image" src="https://th.bing.com/th/id/OIP.wlY3jpIqY1OxNPabE658cwHaE7?rs=1&pid=ImgDetMain" alt="Gourmet Egg Spread">
+    </section>
+    
+    <!-- Product Details -->
+    <section class="product-details">
+      <div class="product-info">
+        <h1 class="product-title">Gourmet Egg Spread</h1>
+        <p class="product-subtitle">A delightful breakfast favorite made with farm-fresh eggs and premium ingredients</p>
+        
+        <div class="product-price">$899</div>
+        
+        <div class="product-actions">
+          <div class="action-button">
+            <img src="https://static.vecteezy.com/system/resources/previews/021/013/524/original/like-icon-on-transparent-background-free-png.png" alt="Like" width="30" height="28" >
+          </div>
+          <div class="action-button">
+            <img src="https://th.bing.com/th/id/OIP.F0kKCv5Yv1-KcvP55yNhIQHaHa?rs=1&pid=ImgDetMain" alt="Add to list"width="30" height="28">
+          </div>
+        </div>
+        
+        <div class="ratings">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+        
+        <div class="product-description">
+          <p>
+            Elevate your breakfast or brunch experience with our signature Gourmet Egg Spread, a velvety and flavorful creation that transforms the humble egg into a culinary masterpiece. Made with organic, free-range eggs from local farms, our spread is rich in texture and abundant in taste.
+          </p>
+          <br>
+          <p>
+            Each batch is carefully prepared by our skilled chefs who fold in finely chopped chives, crisp bacon bits, creamy avocado, and a touch of premium cheese. We season it with our proprietary blend of herbs and spices that enhances the natural flavors without overpowering them. A hint of truffle oil adds an elegant finish that distinguishes this spread from ordinary egg dishes.
+          </p>
+          <br>
+          <p>
+            Perfect on artisanal toast, bagels, or as part of a gourmet breakfast board, our Egg Spread comes in a convenient container that preserves its freshness and flavor. Whether you're hosting a sophisticated brunch gathering or treating yourself to a luxurious breakfast, this versatile spread will impress even the most discerning palates.
+          </p>
+          <br>
+          <p>
+            <strong>Ingredients:</strong> Free-range eggs, organic cream, chives, uncured bacon, avocado, aged cheddar, herbs, spices, and a touch of black truffle oil.
+          </p>
+        </div>
+      </div>
+      
+      <div class="order-section">
+        <div class="quantity-label">Quantity</div>
+        <div class="quantity-controls">
+          <button class="quantity-button">
+            <img src="https://th.bing.com/th/id/R.233991f3788863b3cf7524d12cbf26a7?rik=mHJZlfiVqRHPCA&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fsubtraction-png-hd-subtract-symbol-free-icon-512.png&ehk=pSSi2zb9t27I4MVyCzJEw5QPCqUEYOO8wv110kEMyb0%3d&risl=&pid=ImgRaw&r=0" alt="-" width="30" height="28">
+          </button>
+          <div class="quantity-display">1</div>
+          <button class="quantity-button">
+            <img src="https://th.bing.com/th/id/R.08a14ad5fa3e4dc817a16b6c1499f34e?rik=CWlMyoszKiLwOA&pid=ImgRaw&r=0" alt="+"width="30" height="28">
+          </button>
+        </div>
+        
+        <button class="checkout-button">
+          <div class="dot"></div>
+          <span>Checkout</span>
+        </button>
+      </div>
+    </section>
+    
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+      <h2 class="reviews-heading">Reviews</h2>
+      
+      <div class="reviews-grid">
+        <!-- Review Card 1 -->
+        <div class="review-card">
+          <div class="review-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+          </div>
+          
+          <h3 class="review-title">Breakfast Game Changer!</h3>
+          <p class="review-text">
+            This egg spread has revolutionized my morning routine! The texture is perfectly creamy, and the flavors blend so harmoniously. The hint of truffle is divine without being overwhelming.
+          </p>
+          
+          <div class="reviewer">
+            <div class="reviewer-avatar"></div>
+            <div class="reviewer-info">
+              <div class="reviewer-name">Sophia Reynolds</div>
+              <div class="review-date">02/04/2025</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Review Card 2 -->
+        <div class="review-card">
+          <div class="review-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+          </div>
+          
+          <h3 class="review-title">Absolutely Delicious</h3>
+          <p class="review-text">
+            As a food enthusiast, I'm quite picky about breakfast items, but this egg spread exceeds all expectations. The quality of ingredients really shines through, and the balance of flavors is impeccable. So versatile too!
+          </p>
+          
+          <div class="reviewer">
+            <div class="reviewer-avatar"></div>
+            <div class="reviewer-info">
+              <div class="reviewer-name">Marcus Bennett</div>
+              <div class="review-date">18/03/2025</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Review Card 3 -->
+        <div class="review-card">
+          <div class="review-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star" style="opacity: 0.5;">★</span>
+          </div>
+          
+          <h3 class="review-title">Worth Every Penny</h3>
+          <p class="review-text">
+            I was hesitant about the price initially, but after tasting this egg spread, I'm completely convinced it's worth it. The freshness is evident, and it has this luxurious mouthfeel that store-bought spreads can't match. Perfect for lazy weekend brunches!
+          </p>
+          
+          <div class="reviewer">
+            <div class="reviewer-avatar"></div>
+            <div class="reviewer-info">
+              <div class="reviewer-name">Olivia Tanner</div>
+              <div class="review-date">05/02/2025</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
