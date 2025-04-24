@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Constants ---
     const DEFAULT_IMAGE = 'https://via.placeholder.com/1920x500/cccccc/969696?text=Image+Not+Available'; // Wide default
-    const CHECKOUT_PAGE_URL = '/cart.html';
+    const CHECKOUT_PAGE_URL = 'cart.html';
 
     // --- Helper Functions --- (formatPrice, showToast, updateCartCount - keep as they were)
     function formatPrice(priceInCents) {

@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
              if (!Api.isLoggedIn()) {
                  showToast("Please log in to complete your order.", "error");
                  // Optional: Redirect to login
-                 // window.location.href = '/auth.html?redirect=/cart.html';
+                 // window.location.href = '/auth.html?redirect=cart.html';
                   if (payButton) payButton.disabled = false; // Re-enable button
                   payButton.textContent = "Proceed to Payment";
                  return;
