@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="styleguide.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+      
+      body {
+        background-color: #f9f9f9;
+      }
+      
+      .reservation {
+        width: 100%;
+        min-height: 100vh;
+        padding: 20px;
+      }
+      
+      /* Header/Navigation */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 30px;
+      }
+      
+      .logo {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        font-size: 18px;
+      }
+      
+      .logo img {
+        margin-right: 5px;
+      }
+      
+      .navigation-pill-list {
+        display: flex;
+        gap: 20px;
+      }
+      
+      .navigation-pill {
+        cursor: pointer;
+      }
+      
+      .cart-icon {
+        cursor: pointer;
+      }
+      
+      /* Locations Section */
+      .locations-container {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+      
+      .locations-sidebar {
+        flex: 0 0 250px;
+      }
+      
+      .text-wrapper-2 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      
+      .subheading {
+        color: #666;
+        margin-bottom: 15px;
+      }
+      
+      .search-view-full {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #fff;
+        padding: 8px 15px;
+        display: flex;
+        align-items: center;
+      }
+      
+      .search-icon {
+        margin-right: 10px;
+        color: #666;
+      }
+      
+      .close-icon {
+        margin-left: auto;
+        cursor: pointer;
+      }
+      
+      .input-text {
+        border: none;
+        outline: none;
+        flex-grow: 1;
+      }
+      
+      /* Cards Grid */
+      .cards {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        flex: 1;
+      }
+      
+      .card {
+        display: flex;
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      }
+      
+      .image {
+        flex: 0 0 150px;
+        overflow: hidden;
+      }
+      
+      .image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .body {
+        padding: 15px;
+        flex: 1;
+      }
+      
+      .text-wrapper-2 {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      
+      .p {
+        color: #333;
+        line-height: 1.5;
+      }
+      
+      /* Reservation Modal */
+      .reservation-modal {
+        position: fixed;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        padding: 20px;
+        width: 350px;
+        max-width: 90%;
+      }
+      
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+      
+      .close-button {
+        cursor: pointer;
+        font-size: 20px;
+      }
+      
+      .calendar {
+        margin-bottom: 20px;
+      }
+      
+      .header-2 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      
+      .cells {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+      }
+      
+      .calendar-item {
+        text-align: center;
+        padding: 5px;
+        border-radius: 50%;
+      }
+      
+      .calendar-item.active {
+        background-color: #e0e0ff;
+      }
+      
+      .time-controls {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+      
+      .time {
+        display: flex;
+        align-items: center;
+      }
+      
+      .select-input-base {
+        margin-bottom: 15px;
+      }
+      
+      .button {
+        background-color: #1a8cff;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        width: 100%;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reservation">
+      <div class="header">
+        <div class="logo">
+          <span>⊙</span>Home Cooked Meals
+        </div>
+        <div class="navigation-pill-list">
+          <div class="navigation-pill">Home</div>
+          <div class="navigation-pill">Menu</div>
+          <div class="navigation-pill">Locations</div>
+          <div class="navigation-pill">Login</div>
+        </div>
+        <div class="cart-icon">🛒</div>
+      </div>
+      
+      <div class="locations-container">
+        <div class="locations-sidebar">
+          <div class="text-wrapper-2">Locations</div>
+          <div class="subheading">Search our Locations</div>
+          
+          <div class="search-view-full">
+            <span class="search-icon">←</span>
+            <input class="input-text" type="text" value="georgetown">
+            <span class="close-icon">✕</span>
+          </div>
+        </div>
+        
+        <div class="cards">
+          <div class="card">
+            <div class="image">
+              <img src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2019/9/6/FNM_100119-Tex-Mex-Chicken-Salad-Bowl_s4x3.jpg.rend.hgtvcom.1280.1280.suffix/1567792788244.webp" alt="Green Haven Vegan Bistro" />
+            </div>
+            <div class="body">
+              <div class="text">
+                <p class="text-wrapper-2">🌱 Green Haven Vegan Bistro</p>
+                <p class="p">
+                  Discover a plant-based paradise where flavor meets sustainability! At Green Haven, we craft
+                  delicious vegan dishes using fresh, locally-sourced ingredients. Whether you're craving hearty
+                  bowls, vibrant salads, or innovative meat alternatives, our menu is designed to satisfy every taste
+                  while honoring the planet. Join us for a guilt-free feast that nourishes both body and soul!
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="image">
+              <img src="https://kolbykash.com/wp-content/uploads/2023/08/Shrimp-Creole-plated-3-500x500.jpg" />
+            </div>
+            <div class="body">
+              <div class="text">
+                <div class="text-wrapper-2">🔥 Creole Essence Kitchen</div>
+                <p class="p">
+                  Step into a world of bold flavors and rich traditions at Creole Essence Kitchen. Inspired by the
+                  heart and soul of Creole cooking, our menu features authentic, spice-infused dishes that bring
+                  people together. From slow-cooked gumbos to sizzling seafood, every bite tells a story steeped in
+                  history and passion. Come experience the warmth and vibrance of Creole cuisine—where every meal
+                  feels like home.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="image">
+              <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/RX_THUMBNAIL/IMAGES/VENDOR/2025/1/17/af6e94d0-7748-4d7c-b37b-d679d64fa9f7_917194.jpg" />
+            </div>
+            <div class="body">
+              <div class="text">
+                <p class="text-wrapper-2">🥢 Golden Dragon Chinese Cuisine</p>
+                <p class="p">
+                  A journey of taste awaits at Golden Dragon! Indulge in the art of authentic Chinese cooking, where
+                  fragrant spices and fresh ingredients create culinary masterpieces. From crispy Peking duck to
+                  savory dumplings and hand-pulled noodles, every dish is crafted with tradition and excellence.
+                  Whether dining in or taking out, savor the flavors of China in every bite.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Reservation Modal -->
+      <div class="reservation-modal">
+        <div class="modal-header">
+          <div class="text-wrapper-11">Home Cooked Meals Vegan</div>
+          <div class="close-button">✕</div>
+        </div>
+        
+        <div class="calendar">
+          <div class="header-2">
+            <div class="icon-button">❮</div>
+            <div class="title-2">January 2024</div>
+            <div class="icon-button">❯</div>
+          </div>
+          
+          <div class="cells">
+            <div class="calendar-item">MON</div>
+            <div class="calendar-item">TUE</div>
+            <div class="calendar-item">WED</div>
+            <div class="calendar-item">THU</div>
+            <div class="calendar-item">FRI</div>
+            <div class="calendar-item">SAT</div>
+            <div class="calendar-item">SUN</div>
+            
+            <div class="calendar-item active">1</div>
+            <div class="calendar-item">2</div>
+            <div class="calendar-item">3</div>
+            <div class="calendar-item">4</div>
+            <div class="calendar-item">5</div>
+            <div class="calendar-item">6</div>
+            <div class="calendar-item">7</div>
+            
+            <div class="calendar-item">8</div>
+            <div class="calendar-item">9</div>
+            <div class="calendar-item">10</div>
+            <div class="calendar-item">11</div>
+            <div class="calendar-item">12</div>
+            <div class="calendar-item">13</div>
+            <div class="calendar-item">14</div>
+            
+            <div class="calendar-item">15</div>
+            <div class="calendar-item">16</div>
+            <div class="calendar-item">17</div>
+            <div class="calendar-item">18</div>
+            <div class="calendar-item">19</div>
+            <div class="calendar-item">20</div>
+            <div class="calendar-item">21</div>
+            
+            <div class="calendar-item">22</div>
+            <div class="calendar-item">23</div>
+            <div class="calendar-item">24</div>
+            <div class="calendar-item">25</div>
+            <div class="calendar-item">26</div>
+            <div class="calendar-item">27</div>
+            <div class="calendar-item">28</div>
+            
+            <div class="calendar-item">29</div>
+            <div class="calendar-item">30</div>
+            <div class="calendar-item">1</div>
+            <div class="calendar-item">2</div>
+            <div class="calendar-item">3</div>
+            <div class="calendar-item">4</div>
+            <div class="calendar-item">5</div>
+          </div>
+          
+          <div class="actions">
+            <div class="today-link">Today</div>
+            <div class="erase-link">✕ Erase selection</div>
+          </div>
+        </div>
+        
+        <div class="time-section">
+          <div class="from-section">
+            <div class="title-3">From</div>
+            <div class="time-controls">
+              <div class="time">
+                <div class="hour">06</div>
+                <div class="colon">:</div>
+                <div class="minute">00</div>
+              </div>
+              <div class="am-pm">
+                <div class="am active">AM</div>
+                <div class="pm">PM</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="to-section">
+            <div class="title-3">To</div>
+            <div class="time-controls">
+              <div class="time">
+                <div class="hour">06</div>
+                <div class="colon">:</div>
+                <div class="minute">00</div>
+              </div>
+              <div class="am-pm">
+                <div class="am">AM</div>
+                <div class="pm active">PM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="select-input-base">
+          <div class="select-label">Select Table Size</div>
+          <div class="select-dropdown">
+            <select>
+              <option>Select Table Size</option>
+              <option>2 people</option>
+              <option>4 people</option>
+              <option>6 people</option>
+              <option>8+ people</option>
+            </select>
+          </div>
+        </div>
+        
+        <button class="button">Reserve Now!!!</button>
+      </div>
+    </div>
+  </body>
+</html>
