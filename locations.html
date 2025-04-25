@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locations & Reservations - Home Cooked Meals</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="public/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Include Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        /* --- Base & Layout --- */
+        body.locations-page { background-color: #f8f9fa; }
+        .locations-layout {
+            display: flex;
+            gap: 35px;
+            margin-top: 30px;
+            align-items: flex-start; /* Align tops */
+        }
+
+        /* --- Left Column: Location Cards --- */
+        .location-cards-container {
+            flex: 2; /* Takes more space */
+            min-width: 0; /* Prevent overflow */
+             display: flex;
+             flex-direction: column;
+             gap: 25px;
+        }
+        .location-card {
+            display: flex;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            border: 1px solid #e9ecef;
+             transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .location-card:hover {
+             transform: translateY(-3px);
+             box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .location-image {
+            flex: 0 0 200px; /* Fixed image width */
+             max-height: 180px; /* Limit image height */
+            overflow: hidden;
+        }
+        .location-image img { width: 100%; height: 100%; object-fit: cover; display: block;}
+
+        .location-body { padding: 20px; flex: 1; }
+        .location-title { font-size: 1.2rem; font-weight: 600; color: #343a40; margin-bottom: 8px; }
+        .location-description { font-size: 0.9rem; color: #555; line-height: 1.6; }
+         /* Add a button to trigger reservation for this location */
+         .reserve-location-btn {
+             margin-top: 15px;
+             padding: 8px 15px;
+             background-color: #774ae4;
+             color: #fff;
+             border: none;
+             border-radius: 6px;
+             cursor: pointer;
+             font-size: 0.9rem;
+             font-weight: 500;
+             transition: background-color 0.2s;
+         }
+         .reserve-location-btn:hover { background-color: #5a36b4; }
+         .reserve-location-btn i { margin-right: 5px; }
+
+
+        /* --- Right Column: Reservation Form --- */
+        .reservation-sidebar {
+            flex: 1;
+            min-width: 340px; /* Minimum width */
+            max-width: 400px; /* Maximum width */
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e9ecef;
+            position: sticky; /* Make it sticky */
+            top: 100px; /* Adjust based on header height */
+            align-self: flex-start; /* Prevent stretching */
+        }
+         .reservation-sidebar h2 {
+             font-size: 1.5rem;
+             font-weight: 600;
+             color: #343a40;
+             text-align: center;
+             margin-bottom: 25px;
+         }
+
+        .form-group { margin-bottom: 18px; }
+        .form-label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 500; color: #495057; }
+        .form-input, .form-select { width: 100%; padding: 11px 14px; border: 1px solid #ced4da; border-radius: 8px; font-size: 0.95rem; font-family: inherit; transition: border-color 0.2s ease, box-shadow 0.2s ease; background-color: #fff; appearance: none; /* For select */ }
+        .form-input:focus, .form-select:focus { border-color: #774ae4; box-shadow: 0 0 0 3px rgba(119, 74, 228, 0.15); outline: none; }
+         /* Style select dropdown arrow */
+         .form-select {
+             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+             background-repeat: no-repeat;
+             background-position: right 0.75rem center;
+             background-size: 16px 12px;
+             padding-right: 2.5rem; /* Make space for arrow */
+         }
+         .form-input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+             cursor: pointer;
+             opacity: 0.6;
+             filter: invert(0.5) sepia(1) saturate(5) hue-rotate(240deg); /* Style calendar icon slightly */
+         }
+
+         .form-textarea { resize: vertical; min-height: 80px; }
+
+
+        /* Submit Button */
+         #reserve-button { display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 14px; background-color: #774ae4; color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(119, 74, 228, 0.2); margin-top: 10px; }
+         #reserve-button:hover { background-color: #5a36b4; box-shadow: 0 6px 12px rgba(119, 74, 228, 0.3); }
+         #reserve-button:disabled { background-color: #adb5bd; cursor: not-allowed; box-shadow: none; }
+         #reserve-button .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top-color: #fff; animation: spin 1s ease-in-out infinite; margin-right: 8px; }
+         #reserve-button .button-text { line-height: 1; }
+         @keyframes spin { to { transform: rotate(360deg); } }
+
+         /* Info Message for Login */
+         .login-prompt {
+             text-align: center;
+             margin-top: 20px;
+             padding: 15px;
+             background-color: #e9ecef;
+             border-radius: 8px;
+             font-size: 0.95rem;
+             color: #495057;
+         }
+         .login-prompt a {
+             color: #774ae4;
+             font-weight: 600;
+             text-decoration: none;
+         }
+          .login-prompt a:hover { text-decoration: underline; }
+
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .locations-layout { flex-direction: column; }
+            .reservation-sidebar { position: static; width: 100%; max-width: 600px; margin: 30px auto 0 auto; }
+            .location-card { flex-direction: column; }
+            .location-image { flex-basis: auto; width: 100%; max-height: 250px; }
+        }
+
+    </style>
+</head>
+<body class="locations-page">
+    <div class="home">
+        <!-- Header -->
+         <header class="header">
+           <div class="container">
+                 <a href="/" class="logo-container" style="text-decoration: none;">
+                    <i class="logo-icon fa-solid fa-leaf"></i>
+                    <span class="logo-text">Home Cooked Meals</span>
+                </a>
+                <div class="nav-cart-container">
+                     <nav class="navigation">
+                        <ul class="navigation-pill-list">
+                            <li><a href="index.html" class="navigation-pill">Home</a></li>
+                            <li><a href="menu.html" class="navigation-pill">Menu</a></li>
+                            <!-- Make Locations active -->
+                            <li><a href="locations.html" class="navigation-pill active">Locations</a></li>
+                             <li><a href="reservations.html" class="navigation-pill">My Reservations</a></li>
+                            <li><a href="auth.html" class="navigation-pill">Login</a></li>
+                        </ul>
+                    </nav>
+                    <div class="cart-container">
+                        <a href="cart.html" aria-label="View Cart">
+                            <i class="simple-cart fa-solid fa-cart-shopping"></i>
+                            <span id="cart-count">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content-spacing">
+            <div class="container">
+                <h1 class="page-title" style="text-align: center;">Our Locations</h1>
+
+                <div class="locations-layout">
+
+                    <!-- Location Cards -->
+                    <div class="location-cards-container" id="location-cards">
+                        <!-- Card 1 -->
+                         <div class="location-card" data-location-name="Green Haven Vegan Bistro">
+                            <div class="location-image"><img src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2019/9/6/FNM_100119-Tex-Mex-Chicken-Salad-Bowl_s4x3.jpg.rend.hgtvcom.1280.1280.suffix/1567792788244.webp" alt="Green Haven Vegan Bistro" /></div>
+                            <div class="location-body">
+                                <h3 class="location-title">🌱 Green Haven Vegan Bistro</h3>
+                                <p class="location-description">Discover a plant-based paradise where flavor meets sustainability! Crafting delicious vegan dishes using fresh, locally-sourced ingredients.</p>
+                                <button class="reserve-location-btn" data-location-service="Reservation at Green Haven Vegan Bistro">
+                                     <i class="fa-regular fa-calendar-check"></i> Reserve Here
+                                 </button>
+                            </div>
+                        </div>
+                        <!-- Card 2 -->
+                         <div class="location-card" data-location-name="Creole Essence Kitchen">
+                             <div class="location-image"><img src="https://kolbykash.com/wp-content/uploads/2023/08/Shrimp-Creole-plated-3-500x500.jpg" alt="Creole Essence Kitchen"/></div>
+                             <div class="location-body">
+                                 <h3 class="location-title">🔥 Creole Essence Kitchen</h3>
+                                 <p class="location-description">Step into a world of bold flavors inspired by the heart and soul of Creole cooking. Authentic, spice-infused dishes that bring people together.</p>
+                                  <button class="reserve-location-btn" data-location-service="Reservation at Creole Essence Kitchen">
+                                     <i class="fa-regular fa-calendar-check"></i> Reserve Here
+                                 </button>
+                             </div>
+                         </div>
+                         <!-- Card 3 -->
+                          <div class="location-card" data-location-name="Golden Dragon Chinese Cuisine">
+                             <div class="location-image"><img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/RX_THUMBNAIL/IMAGES/VENDOR/2025/1/17/af6e94d0-7748-4d7c-b37b-d679d64fa9f7_917194.jpg" alt="Golden Dragon Chinese Cuisine"/></div>
+                             <div class="location-body">
+                                 <h3 class="location-title">🥢 Golden Dragon Chinese Cuisine</h3>
+                                 <p class="location-description">Indulge in the art of authentic Chinese cooking, where fragrant spices and fresh ingredients create culinary masterpieces.</p>
+                                  <button class="reserve-location-btn" data-location-service="Reservation at Golden Dragon Chinese Cuisine">
+                                     <i class="fa-regular fa-calendar-check"></i> Reserve Here
+                                 </button>
+                             </div>
+                         </div>
+                         <!-- Add more location cards as needed -->
+                    </div>
+
+                    <!-- Reservation Sidebar -->
+                    <aside class="reservation-sidebar">
+                        <h2>Make a Reservation</h2>
+                        <div id="reservation-form-container">
+                             <!-- Form will be placed here by JS if logged in -->
+                              <div class="login-prompt" id="login-prompt">
+                                 Please <a href="auth.html?redirect=locations.html">log in</a> to make a reservation.
+                             </div>
+                        </div>
+                    </aside>
+
+                </div><!-- End locations-layout -->
+            </div> <!-- End container -->
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer"> <div class="container"> <p>© <span id="currentYear">...</span> Home Cooked Meals. All rights reserved.</p> <nav class="footer-nav"> <a href="/privacy.html">Privacy Policy</a> | <a href="/terms.html">Terms of Service</a> </nav> </div> </footer>
+    </div>
+
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/locations_app.js"></script> <!-- JS for this page -->
+    <script src="js/script.js"></script>
+    <script src="js/header_auth.js"></script>
+</body>
+</html>
