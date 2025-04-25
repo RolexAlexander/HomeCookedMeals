@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function displayLoginPrompt() {
          if (!reservationList) return;
-         reservationList.innerHTML = `<div class="login-prompt">Please <a href="/auth.html?redirect=${encodeURIComponent(window.location.pathname)}">log in</a> to view your reservations.</div>`;
+         reservationList.innerHTML = `<div class="login-prompt">Please <a href="auth.html?redirect=${encodeURIComponent(window.location.pathname)}">log in</a> to view your reservations.</div>`;
     }
      function displayLoading() {
          if (!reservationList) return;
