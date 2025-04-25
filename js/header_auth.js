@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const navList = document.querySelector('.navigation-pill-list');
                  const newLoginLi = document.createElement('li');
                  const newLoginA = document.createElement('a');
-                 newLoginA.href = '/auth.html';
+                 newLoginA.href = 'auth.html';
                  newLoginA.classList.add('navigation-pill');
                  newLoginA.textContent = 'Login';
                  newLoginLi.appendChild(newLoginA);

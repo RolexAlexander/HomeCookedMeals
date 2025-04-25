@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Reservations - Home Cooked Meals</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="public/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Flatpickr CSS (if using for editing) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        /* Styles for My Reservations page */
+        .reservations-list-container {
+            max-width: 900px; /* Control width */
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .page-title { /* Reuse title style */
+            font-size: 28px; font-weight: 600; color: #343a40; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid #e9ecef; text-align: center;
+        }
+        .reservation-list {
+            display: grid;
+            gap: 20px;
+        }
+        .reservation-item {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            border: 1px solid #e9ecef;
+            display: flex;
+            flex-wrap: wrap; /* Wrap on smaller screens */
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        .reservation-details {
+            flex-grow: 1;
+        }
+         .reservation-details strong { font-weight: 600; color: #495057; min-width: 100px; display: inline-block;}
+         .reservation-details p { margin-bottom: 8px; font-size: 0.95rem; color: #555;}
+         .reservation-details p:last-child { margin-bottom: 0; }
+         .reservation-status {
+             font-weight: 600;
+             padding: 4px 10px;
+             border-radius: 20px;
+             font-size: 0.85rem;
+             text-transform: capitalize;
+         }
+         /* Status colors */
+         .status-pending, .status-scheduled { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba;}
+         .status-confirmed { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;}
+         .status-cancelled { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;}
+         .status-completed { background-color: #e2e3e5; color: #383d41; border: 1px solid #d6d8db;}
+
+        .reservation-actions {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .action-btn {
+            background: none;
+            border: 1px solid #ced4da;
+            color: #495057;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+             display: inline-flex;
+             align-items: center;
+             gap: 5px;
+        }
+         .action-btn:hover { border-color: #adb5bd; background-color: #f8f9fa;}
+         .action-btn.edit-btn:hover { border-color: #774ae4; color: #774ae4;}
+         .action-btn.cancel-btn:hover { border-color: #dc3545; color: #dc3545;}
+         .action-btn i { font-size: 0.9em; }
+
+        /* Loading/Empty State */
+         .loading-error-message { text-align: center; padding: 50px 20px; font-size: 1.1rem; color: #6c757d; }
+         .login-prompt { /* Reuse style from locations */ text-align: center; margin-top: 20px; padding: 15px; background-color: #e9ecef; border-radius: 8px; font-size: 0.95rem; color: #495057; }
+         .login-prompt a { color: #774ae4; font-weight: 600; text-decoration: none; }
+         .login-prompt a:hover { text-decoration: underline; }
+
+         /* Edit Modal (Basic Example - Consider using a dedicated modal library) */
+          .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 1000; }
+          .modal-overlay.visible { display: flex; }
+          .modal-content { background-color: #fff; padding: 30px; border-radius: 10px; max-width: 500px; width: 90%; position: relative; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+          .modal-close-btn { position: absolute; top: 10px; right: 15px; font-size: 1.5rem; cursor: pointer; border: none; background: none; color: #6c757d; }
+          .modal-title { font-size: 1.4rem; margin-bottom: 20px; text-align: center; }
+          /* Reuse form styles */
+          .modal-content .form-group { margin-bottom: 15px;}
+          .modal-actions { margin-top: 25px; display: flex; justify-content: flex-end; gap: 10px;}
+          .modal-btn { padding: 10px 20px; border-radius: 6px; border: none; cursor: pointer; font-weight: 500; }
+          .modal-btn.save { background-color: #774ae4; color: #fff; }
+          .modal-btn.cancel { background-color: #f1f3f5; color: #495057; }
+
+    </style>
+</head>
+<body>
+    <div class="home">
+        <!-- Header -->
+         <header class="header">
+           <div class="container">
+                 <a href="/" class="logo-container" style="text-decoration: none;">
+                    <i class="logo-icon fa-solid fa-leaf"></i>
+                    <span class="logo-text">Home Cooked Meals</span>
+                </a>
+                <div class="nav-cart-container">
+                     <nav class="navigation">
+                        <ul class="navigation-pill-list">
+                            <li><a href="index.html" class="navigation-pill">Home</a></li>
+                            <li><a href="menu.html" class="navigation-pill">Menu</a></li>
+                            <li><a href="locations.html" class="navigation-pill">Locations</a></li>
+                             <!-- Make My Reservations active -->
+                            <li><a href="reservations.html" class="navigation-pill active">My Reservations</a></li>
+                            <li><a href="auth.html" class="navigation-pill">Login</a></li>
+                        </ul>
+                    </nav>
+                    <div class="cart-container">
+                        <a href="cart.html" aria-label="View Cart">
+                            <i class="simple-cart fa-solid fa-cart-shopping"></i>
+                            <span id="cart-count">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content-spacing">
+            <div class="reservations-list-container" id="reservations-content">
+                <h1 class="page-title">My Reservations</h1>
+                <div class="reservation-list" id="reservation-list">
+                    <!-- Loading / Empty / Login Prompt -->
+                     <div class="loading-error-message">Loading reservations...</div>
+                     <!-- <div class="login-prompt">Please <a href="auth.html?redirect=/reservations.html">log in</a> to view your reservations.</div> -->
+                     <!-- <p>You have no upcoming reservations.</p> -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Edit Modal -->
+         <div class="modal-overlay" id="edit-modal">
+             <div class="modal-content">
+                 <button class="modal-close-btn" id="modal-close-btn">×</button>
+                 <h2 class="modal-title">Edit Reservation</h2>
+                 <form id="edit-reservation-form">
+                     <input type="hidden" id="edit-reservation-id">
+                     <div class="form-group">
+                         <label for="edit-reservation-service" class="form-label">Service/Location</label>
+                         <input type="text" id="edit-reservation-service" class="form-input" name="service" required readonly>
+                     </div>
+                     <div class="form-group">
+                         <label for="edit-reservation-datetime" class="form-label">New Date & Time</label>
+                         <input type="text" id="edit-reservation-datetime" class="form-input" name="dateTime" required placeholder="Select new date and time">
+                         <small style="font-size: 0.8rem; color: #6c757d; margin-top: 5px; display: block;">Select date first, then time.</small>
+                     </div>
+                     <div class="form-group">
+                         <label for="edit-reservation-notes" class="form-label">Notes (Optional)</label>
+                         <textarea id="edit-reservation-notes" name="notes" class="form-input form-textarea" placeholder="Update special requests?"></textarea>
+                     </div>
+                     <div class="modal-actions">
+                         <button type="button" class="modal-btn cancel" id="modal-cancel-btn">Cancel</button>
+                         <button type="submit" class="modal-btn save" id="modal-save-btn">Save Changes</button>
+                     </div>
+                 </form>
+             </div>
+         </div>
+
+
+        <!-- Footer -->
+        <footer class="footer"> <div class="container"> <p>© <span id="currentYear">...</span> Home Cooked Meals. All rights reserved.</p> <nav class="footer-nav"> <a href="/privacy.html">Privacy Policy</a> | <a href="/terms.html">Terms of Service</a> </nav> </div> </footer>
+    </div>
+
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/reservations_app.js"></script> <!-- JS for this page -->
+    <script src="js/script.js"></script>
+    <script src="js/header_auth.js"></script>
+</body>
+</html>

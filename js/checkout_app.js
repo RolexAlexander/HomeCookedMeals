@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setSectionVisibility(checkoutFormEl, false);
         setSectionVisibility(confirmationSectionEl, false);
 
-        if (!Api.isLoggedIn()) { /* ... keep login check and redirect ... */ console.log("CHECKOUT_APP: User not logged in. Redirecting..."); showToast("Please log in to proceed.", "info"); window.location.href = `/auth.html?redirect=${encodeURIComponent(window.location.pathname)}`; return; }
+        if (!Api.isLoggedIn()) { /* ... keep login check and redirect ... */ console.log("CHECKOUT_APP: User not logged in. Redirecting..."); showToast("Please log in to proceed.", "info"); window.location.href = `auth.html?redirect=${encodeURIComponent(window.location.pathname)}`; return; }
 
         try {
             const cart = Api.getCart();
