@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 showToast("Login successful! Redirecting...", 'success', 2000);
                 // Token stored automatically by Api.js
                 // Redirect after a short delay for toast
-                setTimeout(() => { window.location.href = '/'; }, 1000);
+                setTimeout(() => { window.location.href = 'index.html'; }, 1000);
             } else {
                 console.error("AUTH_APP: Login failed:", result.body.message);
                 showToast(`Login failed: ${result.body.message || 'Invalid credentials'}`, 'error');
