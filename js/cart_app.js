@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Constants ---
     const TAX_RATE = 0.08; // 8% Tax Rate - Adjust as needed
-    const PAYMENT_PAGE_URL = '/pay.html'; // Target page after successful checkout API call
+    const PAYMENT_PAGE_URL = 'checkout.html'; // Target page after successful checkout API call
     const DEFAULT_ITEM_IMAGE = 'https://via.placeholder.com/60x60/cccccc/969696?text=Meal';
 
     // --- Helper Functions ---
